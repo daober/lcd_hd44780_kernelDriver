@@ -1,3 +1,5 @@
+
+
 #include <linux/module.h>
 #include <linux/fs.h>
 #include <linux/cdev.h>
@@ -6,8 +8,11 @@
 #include <linux/delay.h>
 #include <linux/ctype.h>
 #include <asm/uaccess.h>
+#include <asm/errno.h>
 
-static dev_t hd44780_dev_number = MKDEV(255, 0);
+#define ERRMSG -1
+
+static dev_t hd44780_dev_number = MKDEV(248, 0);
 static struct cdev *driver_object;
 static struct class *hd44780_class;
 static struct device *hd44780_dev;
@@ -32,8 +37,8 @@ static void write_nibble(int regist, int value){
 
 
 static void write_lcd(int regist, int value){
-	nibble_write(reg, value >> 4); //HIGH-Nibble logic
-	nibble_write(reg, value & 0xf); //LOW-Nibble logic
+	write_nibble(regist, value >> 4); //HIGH-Nibble logic
+	write_nibble(regist, value & 0xf); //LOW-Nibble logic
 }
 
 
@@ -59,12 +64,12 @@ static int gpio_request_output(int nr){
 }
 
 
-static int initialize_disp(){
+static int init_disp(void){
 
 	printk("initialize display\n");
 
 	if(gpio_request_output(7) == -1){
-		 return -EI0;
+		 return -ERRMSG;
 	}
 	if(gpio_request_output(8) == -1){
 		goto free7;
@@ -83,23 +88,23 @@ static int initialize_disp(){
 	}
 
 msleep(15);
-nibble_write(0, 0x3);
+write_nibble(0, 0x3);
 msleep(5);
-nibble_write(0, 0x3);
+write_nibble(0, 0x3);
 udelay(100);
-nibble_write(0, 0x3);
+write_nibble(0, 0x3);
 msleep(5);
-nibble_write(0, 0x2);
+write_nibble(0, 0x2);
 msleep(5);
-lcd_write(0, 0x28);	//Command: 4-Bit Mode, 2 lines
+write_lcd(0, 0x28);	//Command: 4-Bit Mode, 2 lines
 msleep(2);
-lcd_write(0, 0x01);
+write_lcd(0, 0x01);
 msleep(2);
 
-lcd_write(0, 0x0c);	 //display on, cursor off, blink off
-lcd_write(0, 0xc0);
-lcd_write(1, 'H');
-lcd_write(1, 'i');
+write_lcd(0, 0x0c);	 //display on, cursor off, blink off
+write_lcd(0, 0xc0);
+write_lcd(1, 'H');
+write_lcd(1, 'i');
 	return 0;
 
 free24: gpio_free(24);
@@ -107,11 +112,11 @@ free23: gpio_free(23);
 free18: gpio_free(18);
 free8: gpio_free(8);
 free7: gpio_free(7);
-	return -EI0;
+	return -ERRMSG;
 }
 
 
-static int display_exit(){
+static int display_exit(void){
 	printk("exit display called\n");
 	gpio_free(25);
 	gpio_free(24);
@@ -125,30 +130,36 @@ static int display_exit(){
 
 static ssize_t driver_write(struct file *instance, const char __user *user, size_t cnt, loff_t *offset){
 
-	unsigned long not_copied = copy_from_user(textbuffer, user, to_copy);
-	unsigned long to_copy = min(cnt, sizeof(textbuffer));
+	unsigned long not_copied; 
+	unsigned long to_copy;
+	int i;
 
-	lcd_write(0, 0x80);
+	to_copy = min(cnt, sizeof(textbuffer));
+	not_copied = copy_from_user(textbuffer, user, to_copy);
 
-	for(int i = 0; i < to_copy && textbuffer[i]; i++){
+	write_lcd(0, 0x80);
+
+	for(i = 0; i < to_copy && textbuffer[i]; i++){
 		if(isprint(textbuffer[i])){
-			lcd_write(1, textbuffer[i]));
+			write_lcd(1, textbuffer[i]);
 		}
 		if( i == 15){
-			lcd_write(0, 0xc0);
+			write_lcd(0, 0xc0);
 		}
+}
 		return to_copy-not_copied;
-	}
+	
+}
 
 	static struct file_operations fops = {
 		.owner = THIS_MODULE,
 		.write = driver_write,
 	};
 
-	static int __init mod_init(){
+	static int __init mod_init(void){
 		if(register_chrdev_region(hd44780_dev_number, 1, "hd44780") < 0){
 			printk("devicenumber(255, 0) in use!\n");
-			return -EI0;
+			return -ERRMSG;
 	}
 	driver_object = cdev_alloc();	/* registered object reserved*/
 
@@ -167,7 +178,7 @@ static ssize_t driver_write(struct file *instance, const char __user *user, size
 	}
 	hd44780_dev = device_create(hd44780_class, NULL, hd44780_dev_number, NULL, "%s", "hd44780");
 	dev_info(hd44780_dev, "mod_init called\n");
-	if(display_init() == 0){
+	if(init_disp() == 0){
 		return 0;
 	}
 
@@ -176,10 +187,10 @@ static ssize_t driver_write(struct file *instance, const char __user *user, size
 	free_device_number:
 		unregister_chrdev_region(hd44780_dev_number, 1);
 		printk("mod_init failed\n");
-		return -EI0;
+		return -ERRMSG;
 }
 
-static void __exit mod_exit(){
+static void __exit mod_exit(void){
 	dev_info(hd44780_dev, "mod_exit called\n");
 	display_exit();
 	device_destroy(hd44780_class, hd44780_dev_number);
