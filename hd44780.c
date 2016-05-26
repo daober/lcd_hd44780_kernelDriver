@@ -1,6 +1,8 @@
 
 
-#include <linux/module.h>
+#include <linux/module.h>	//for all modules
+#include <linux/kernel.h>	//for prink priority macros
+#include <linux/init.h>		//for entry/exit macros
 #include <linux/fs.h>
 #include <linux/cdev.h>
 #include <linux/device.h>
@@ -10,7 +12,6 @@
 #include <asm/uaccess.h>
 #include <asm/errno.h>
 
-#define ERRMSG -1
 
 static dev_t hd44780_dev_number = MKDEV(248, 0);
 static struct cdev *driver_object;
@@ -69,7 +70,7 @@ static int init_disp(void){
 	printk("initialize display\n");
 
 	if(gpio_request_output(7) == -1){
-		 return -ERRMSG;
+		 return -EIO;
 	}
 	if(gpio_request_output(8) == -1){
 		goto free7;
@@ -112,7 +113,7 @@ free23: gpio_free(23);
 free18: gpio_free(18);
 free8: gpio_free(8);
 free7: gpio_free(7);
-	return -ERRMSG;
+	return -EIO;
 }
 
 
@@ -159,7 +160,7 @@ static ssize_t driver_write(struct file *instance, const char __user *user, size
 	static int __init mod_init(void){
 		if(register_chrdev_region(hd44780_dev_number, 1, "hd44780") < 0){
 			printk("devicenumber(255, 0) in use!\n");
-			return -ERRMSG;
+			return -EIO;
 	}
 	driver_object = cdev_alloc();	/* registered object reserved*/
 
@@ -187,7 +188,7 @@ static ssize_t driver_write(struct file *instance, const char __user *user, size
 	free_device_number:
 		unregister_chrdev_region(hd44780_dev_number, 1);
 		printk("mod_init failed\n");
-		return -ERRMSG;
+		return -EIO;
 }
 
 static void __exit mod_exit(void){
