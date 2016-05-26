@@ -5,6 +5,7 @@
 #include <linux/init.h>		//for entry/exit macros
 #include <linux/fs.h>
 #include <linux/cdev.h>
+#include <linux/types.h>
 #include <linux/device.h>
 #include <linux/gpio.h>
 #include <linux/delay.h>
@@ -13,7 +14,8 @@
 #include <asm/errno.h>
 
 
-static dev_t hd44780_dev_number = MKDEV(248, 0);
+static dev_t hd44780_dev_number = MKDEV(230, 15);
+
 static struct cdev *driver_object;
 static struct class *hd44780_class;
 static struct device *hd44780_dev;

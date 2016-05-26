@@ -1,0 +1,1 @@
+cmd_/home/pi/SysProg/lcd-driver/hd44780.ko := ld -EL -r  -T ./scripts/module-common.lds --build-id  -o /home/pi/SysProg/lcd-driver/hd44780.ko /home/pi/SysProg/lcd-driver/hd44780.o /home/pi/SysProg/lcd-driver/hd44780.mod.o

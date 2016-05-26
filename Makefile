@@ -1,12 +1,10 @@
-obj-m := hd44780.o
+#very basic makefile for lcd-kernel module
 
-all:
+obj-m += hd44780.o
+
+default:
 	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules
 
 clean:
-	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) clean
-	
-install:
-	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) install
-
+	rm -rf *.o *~core .depend .*.cmd *.ko *.mod.c .tmp_versions
 
