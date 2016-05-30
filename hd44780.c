@@ -12,7 +12,11 @@
 #include <linux/ctype.h>
 #include <asm/uaccess.h>
 #include <asm/errno.h>
-
+#include <linux/sched.h>
+#include <linux/wait.h>
+#include <linux/hrtimer.h>
+#include <linux/ktime.h>
+#include <linux/interrupt.h>
 
 static dev_t hd44780_dev_number = MKDEV(230, 15);
 
@@ -205,6 +209,10 @@ static void __exit mod_exit(void){
 
 module_init(mod_init);
 module_exit(mod_exit);
+
+
+MODULE_AUTHOR("Daniel Obermaier <mailto:dan.obermaier@gmail.com>");
+MODULE_DESCRIPTION("Driver for LCD Display with HD44780 Controller");
 MODULE_LICENSE("GPL");
 
 
