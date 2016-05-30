@@ -129,7 +129,11 @@ msleep(2);
 write_lcd(0, 0x0c);	 //display on, cursor off, blink off
 write_lcd(0, 0xc0);
 write_lcd(1, 'H');
-write_lcd(1, 'i');
+write_lcd(1, 'a');
+write_lcd(1, 'l');
+write_lcd(1, 'l');
+write_lcd(1, 'o');
+
 	return 0;
 
 free24: gpio_free(24);
