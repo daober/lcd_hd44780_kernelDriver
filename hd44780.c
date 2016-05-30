@@ -2,11 +2,17 @@
 
 #include <linux/module.h>	//for all modules
 #include <linux/kernel.h>	//for prink priority macros
+
 #include <linux/init.h>		//for entry/exit macros
 #include <linux/fs.h>
+
 #include <linux/cdev.h>
+#include <linux/ioctl.h>
+
 #include <linux/types.h>
 #include <linux/device.h>
+
+#include <linux/cdev.h>
 #include <linux/gpio.h>
 #include <linux/delay.h>
 #include <linux/ctype.h>
@@ -18,6 +24,8 @@
 #include <linux/ktime.h>
 #include <linux/interrupt.h>
 
+#include "ioctl_header.h"
+
 static dev_t hd44780_dev_number = MKDEV(230, 15);
 
 static struct cdev *driver_object;
@@ -25,6 +33,16 @@ static struct class *hd44780_class;
 static struct device *hd44780_dev;
 static char textbuffer[1024];
 
+//function prototypes
+static void write_nibble(int regist, int value);
+static void write_lcd(int regist, int value);
+static int gpio_request_output(int nr);
+
+static int init_disp(void);
+static int display_exit(void);
+
+static ssize_t driver_write(struct file *instance, const char __user *user, size_t cnt, loff_t *offset);
+static void __exit mod_exit(void);
 
 static void write_nibble(int regist, int value){
 
@@ -212,7 +230,7 @@ module_exit(mod_exit);
 
 
 MODULE_AUTHOR("Daniel Obermaier <mailto:dan.obermaier@gmail.com>");
-MODULE_DESCRIPTION("Driver for LCD Display with HD44780 Controller");
+MODULE_DESCRIPTION("driver for LCD Display with HD44780 controller");
 MODULE_LICENSE("GPL");
 
 

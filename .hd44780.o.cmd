@@ -758,6 +758,7 @@ deps_/home/pi/SysProg/lcd-driver/hd44780.o := \
   include/linux/static_key.h \
   arch/arm/include/asm/hardirq.h \
   include/linux/irq_cpustat.h \
+  /home/pi/SysProg/lcd-driver/ioctl_header.h \
 
 /home/pi/SysProg/lcd-driver/hd44780.o: $(deps_/home/pi/SysProg/lcd-driver/hd44780.o)
 
