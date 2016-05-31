@@ -43,7 +43,8 @@ static char textbuffer[1024];
 static void write_nibble(int regist, int value);
 static void write_lcd(int regist, int value);
 static int gpio_request_output(int nr);
-static int display_exit(void);
+static int exit_display(void);
+static int clear_display(void);
 
 static long function_ioctl(struct file *fp, unsigned int cmd, unsigned long arg);
 
@@ -157,7 +158,7 @@ free7: gpio_free(7);
 }
 
 
-static int display_exit(void){
+static int exit_display(void){
 	printk("exit display called\n");
 	gpio_free(25);
 	gpio_free(24);
@@ -175,6 +176,8 @@ static ssize_t driver_write(struct file *instance, const char __user *user, size
 	unsigned long to_copy;
 	int i;
 
+	char msg_from_user[26] = { 0 };
+
 	to_copy = min(cnt, sizeof(textbuffer));
 	not_copied = copy_from_user(textbuffer, user, to_copy);
 
@@ -187,62 +190,74 @@ static ssize_t driver_write(struct file *instance, const char __user *user, size
 		if( i == 15){
 			write_lcd(0, 0xc0);
 		}
+	}
+
+	if(copy_from_user(msg_from_user, user, cnt)) {
+		printk("failed copy from user");
+	}
+return to_copy-not_copied;
 }
-		return to_copy-not_copied;
+
+static struct file_operations fops = {
+	.owner = THIS_MODULE,
+	.open = init_display,
+	//.release = exit_display,
+	.write = driver_write,
+	.unlocked_ioctl = function_ioctl,
+};
+
+static int __init mod_init(void){
+int error = 0; 	
+
+dev = MKDEV(major, minor);
+
+if(register_chrdev_region(MKDEV(major, 0),count,"hd44780") < 0){
+	printk("devicenumber(255, 0) in use!\n");
+	return -EIO;
+}
+else{
+	error = alloc_chrdev_region(&dev, 0, count, "hd44780");
+	major = MAJOR(dev);
+}
+
+driver_object = cdev_alloc();	/* registered object reserved*/
+
+if(driver_object == NULL){
+	goto free_device_number;
+}
+
+driver_object->owner = THIS_MODULE;
+driver_object->ops = &fops;
 	
+if(cdev_add(driver_object, dev, 1)){
+	goto free_cdev;
 }
 
-	static struct file_operations fops = {
-		.owner = THIS_MODULE,
-		.write = driver_write,
-		.unlocked_ioctl = function_ioctl,
-	};
+hd44780_class = class_create(THIS_MODULE, "hd44780");
 
-	static int __init mod_init(void){
-	int error = 0; 	
+if(IS_ERR(hd44780_class)){
+	pr_err("hd44780: no udev support!\n");
+	goto free_cdev;
+}
 
-	dev = MKDEV(major, minor);
+hd44780_dev = device_create(hd44780_class, NULL, dev, NULL, "%s", "hd44780");
+dev_info(hd44780_dev, "mod_init called\n");
 
-	if(register_chrdev_region(MKDEV(major, 0),count,"hd44780") < 0){
-		printk("devicenumber(230, 15) in use!\n");
-		return -EIO;
-	}
-	else{
-		error = alloc_chrdev_region(&dev, 0, count, "hd44780");
-		major = MAJOR(dev);
-	}
-	driver_object = cdev_alloc();	/* registered object reserved*/
+if(init_display() == 0){
+	return 0;
+}
 
-	if(driver_object == NULL){
-		goto free_device_number;
-	}
-	driver_object->owner = THIS_MODULE;
-	driver_object->ops = &fops;
-	if(cdev_add(driver_object, dev, 1)){
-		goto free_cdev;
-	}
-	hd44780_class = class_create(THIS_MODULE, "hd44780");
-	if(IS_ERR(hd44780_class)){
-		pr_err("hd44780: no udev support!\n");
-		goto free_cdev;
-	}
-	hd44780_dev = device_create(hd44780_class, NULL, dev, NULL, "%s", "hd44780");
-	dev_info(hd44780_dev, "mod_init called\n");
-	if(init_display() == 0){
-		return 0;
-	}
-
-	free_cdev:
-		kobject_put(&driver_object->kobj);
-	free_device_number:
-		unregister_chrdev_region(dev, 1);
-		printk("mod_init failed\n");
-		return -EIO;
+free_cdev:
+	kobject_put(&driver_object->kobj);
+free_device_number:
+	unregister_chrdev_region(dev, 1);
+	printk("mod_init failed\n");
+	return -EIO;
 }
 
 static void __exit mod_exit(void){
 	dev_info(hd44780_dev, "mod_exit called\n");
-	display_exit();
+	exit_display();
 	device_destroy(hd44780_class, dev);
 	class_destroy(hd44780_class);
 	cdev_del(driver_object);
@@ -256,25 +271,30 @@ int value = 5;
 
 switch(cmd){
 	case IOCTL_WRITE:
-		put_user(value, (int *)arg);
-		printk("IOCTL_WRITE was selected");
+//		put_user(value, (int *)arg);
+		printk("IOCTL_WRITE was selected\n");
 		break;
-
+//	case IOCTL_CLEAR:
+//		put_user(value, (int *)arg);
+//		printk("IOCTL_CLEAR was selected\n");
+//		break;
 	default:
+		printk("no argument was selected\n");
 		retval = -EFAULT;
-}
-
+		break;
+	}
 return retval;
-
 }
 
+
+static int clear_display(void){
+	
+	return 0;
+}
 
 module_init(mod_init);
 module_exit(mod_exit);
 
-
 MODULE_AUTHOR("Daniel Obermaier <mailto:dan.obermaier@gmail.com>");
 MODULE_DESCRIPTION("driver for LCD Display with HD44780 controller");
 MODULE_LICENSE("GPL");
-
-
