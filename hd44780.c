@@ -1,6 +1,7 @@
 
 
 #include <linux/module.h>	//for all modules
+#include <linux/moduleparam.h>
 #include <linux/kernel.h>	//for prink priority macros
 
 #include <linux/init.h>		//for entry/exit macros
@@ -11,7 +12,6 @@
 
 #include <linux/types.h>
 #include <linux/device.h>
-
 #include <linux/cdev.h>
 #include <linux/gpio.h>
 #include <linux/delay.h>
@@ -26,7 +26,13 @@
 
 #include "ioctl_header.h"
 
-static dev_t hd44780_dev_number = MKDEV(230, 15);
+//static dev_t hd44780_dev_number = MKDEV(230, 0);
+
+static int major = 0;
+static int minor = 0;
+static int count = 1;
+
+dev_t dev = 0;
 
 static struct cdev *driver_object;
 static struct class *hd44780_class;
@@ -37,12 +43,18 @@ static char textbuffer[1024];
 static void write_nibble(int regist, int value);
 static void write_lcd(int regist, int value);
 static int gpio_request_output(int nr);
-
-static int init_disp(void);
 static int display_exit(void);
 
+static long function_ioctl(struct file *fp, unsigned int cmd, unsigned long arg);
+
 static ssize_t driver_write(struct file *instance, const char __user *user, size_t cnt, loff_t *offset);
+
 static void __exit mod_exit(void);
+static int __init init_display(void);
+
+//module parameters -> allow arguments to be passed to modules
+module_param(major, int, S_IRUGO | S_IWUSR);
+module_param(count, int, S_IRUGO | S_IWUSR);
 
 static void write_nibble(int regist, int value){
 
@@ -89,7 +101,7 @@ static int gpio_request_output(int nr){
 }
 
 
-static int init_disp(void){
+static int __init init_display(void){
 
 	printk("initialize display\n");
 
@@ -183,12 +195,21 @@ static ssize_t driver_write(struct file *instance, const char __user *user, size
 	static struct file_operations fops = {
 		.owner = THIS_MODULE,
 		.write = driver_write,
+		.unlocked_ioctl = function_ioctl,
 	};
 
 	static int __init mod_init(void){
-		if(register_chrdev_region(hd44780_dev_number, 1, "hd44780") < 0){
-			printk("devicenumber(255, 0) in use!\n");
-			return -EIO;
+	int error = 0; 	
+
+	dev = MKDEV(major, minor);
+
+	if(register_chrdev_region(MKDEV(major, 0),count,"hd44780") < 0){
+		printk("devicenumber(230, 15) in use!\n");
+		return -EIO;
+	}
+	else{
+		error = alloc_chrdev_region(&dev, 0, count, "hd44780");
+		major = MAJOR(dev);
 	}
 	driver_object = cdev_alloc();	/* registered object reserved*/
 
@@ -197,7 +218,7 @@ static ssize_t driver_write(struct file *instance, const char __user *user, size
 	}
 	driver_object->owner = THIS_MODULE;
 	driver_object->ops = &fops;
-	if(cdev_add(driver_object, hd44780_dev_number, 1)){
+	if(cdev_add(driver_object, dev, 1)){
 		goto free_cdev;
 	}
 	hd44780_class = class_create(THIS_MODULE, "hd44780");
@@ -205,16 +226,16 @@ static ssize_t driver_write(struct file *instance, const char __user *user, size
 		pr_err("hd44780: no udev support!\n");
 		goto free_cdev;
 	}
-	hd44780_dev = device_create(hd44780_class, NULL, hd44780_dev_number, NULL, "%s", "hd44780");
+	hd44780_dev = device_create(hd44780_class, NULL, dev, NULL, "%s", "hd44780");
 	dev_info(hd44780_dev, "mod_init called\n");
-	if(init_disp() == 0){
+	if(init_display() == 0){
 		return 0;
 	}
 
 	free_cdev:
 		kobject_put(&driver_object->kobj);
 	free_device_number:
-		unregister_chrdev_region(hd44780_dev_number, 1);
+		unregister_chrdev_region(dev, 1);
 		printk("mod_init failed\n");
 		return -EIO;
 }
@@ -222,12 +243,31 @@ static ssize_t driver_write(struct file *instance, const char __user *user, size
 static void __exit mod_exit(void){
 	dev_info(hd44780_dev, "mod_exit called\n");
 	display_exit();
-	device_destroy(hd44780_class, hd44780_dev_number);
+	device_destroy(hd44780_class, dev);
 	class_destroy(hd44780_class);
 	cdev_del(driver_object);
-	unregister_chrdev_region(hd44780_dev_number, 1);
+	unregister_chrdev_region(dev, 1);
 	return;
 }
+
+static long function_ioctl(struct file *fp, unsigned int cmd, unsigned long arg){
+int retval = 0;
+int value = 5;
+
+switch(cmd){
+	case IOCTL_WRITE:
+		put_user(value, (int *)arg);
+		printk("IOCTL_WRITE was selected");
+		break;
+
+	default:
+		retval = -EFAULT;
+}
+
+return retval;
+
+}
+
 
 module_init(mod_init);
 module_exit(mod_exit);
