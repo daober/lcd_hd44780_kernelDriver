@@ -1,32 +1,27 @@
 
 
-#include <linux/module.h>	//for all modules
+#include <linux/module.h>	//core header for loading LKMs into the kernel
 #include <linux/moduleparam.h>
 #include <linux/kernel.h>	//for prink priority macros
-
-#include <linux/init.h>		//for entry/exit macros
-#include <linux/fs.h>
-
+#include <linux/init.h>		//for entry/exit macros to mark up functions e.g. __init __exit
+#include <linux/fs.h>		//header for the linux file system support
 #include <linux/cdev.h>
 #include <linux/ioctl.h>
-
 #include <linux/types.h>
-#include <linux/device.h>
+#include <linux/device.h>	//header to support the kernel module driver
 #include <linux/cdev.h>
 #include <linux/gpio.h>
 #include <linux/delay.h>
 #include <linux/ctype.h>
-#include <asm/uaccess.h>
+#include <asm/uaccess.h>	//required for copy_to_user() function
 #include <asm/errno.h>
-#include <linux/sched.h>
+#include <linux/sched.h>	//used for scheduling
 #include <linux/wait.h>
 #include <linux/hrtimer.h>
 #include <linux/ktime.h>
 #include <linux/interrupt.h>
 
-#include "ioctl_header.h"
-
-//static dev_t hd44780_dev_number = MKDEV(230, 0);
+#include "ioctl_header.h"	//includes self-written  macros
 
 static int major = 0;
 static int minor = 0;
@@ -39,19 +34,20 @@ static struct class *hd44780_class;
 static struct device *hd44780_dev;
 static char textbuffer[1024];
 
-//function prototypes
+/*function prototypes start*/
 static void write_nibble(int regist, int value);
 static void write_lcd(int regist, int value);
 static int gpio_request_output(int nr);
 static int exit_display(void);
-static int clear_display(void);
 
+//prototype functions for the character driver (callbacks)
 static long function_ioctl(struct file *fp, unsigned int cmd, unsigned long arg);
-
 static ssize_t driver_write(struct file *instance, const char __user *user, size_t cnt, loff_t *offset);
-
+static int driver_release(struct  inode *node, struct file *fp);
 static void __exit mod_exit(void);
 static int __init init_display(void);
+/*function prototypes end*/
+
 
 //module parameters -> allow arguments to be passed to modules
 module_param(major, int, S_IRUGO | S_IWUSR);
@@ -101,29 +97,30 @@ static int gpio_request_output(int nr){
 	return 0;
 }
 
-
+/** @brief device open function that is called each time the device 
+is opened */
 static int __init init_display(void){
 
-	printk("initialize display\n");
+printk("initialize display\n");
 
-	if(gpio_request_output(7) == -1){
-		 return -EIO;
-	}
-	if(gpio_request_output(8) == -1){
-		goto free7;
-	}
-	if(gpio_request_output(18) == -1){
-		goto free8;
-	}
-	if(gpio_request_output(23) == -1){
-		goto free18;
-	}
-	if(gpio_request_output(24) == -1){
-		goto free23;
-	}
-	if(gpio_request_output(25) == -1){
-		goto free24;
-	}
+if(gpio_request_output(7) == -1){
+	 return -EIO;
+}
+if(gpio_request_output(8) == -1){
+	goto free7;
+}
+if(gpio_request_output(18) == -1){
+	goto free8;
+}
+if(gpio_request_output(23) == -1){
+	goto free18;
+}
+if(gpio_request_output(24) == -1){
+	goto free23;
+}
+if(gpio_request_output(25) == -1){
+	goto free24;
+}
 
 msleep(15);
 write_nibble(0, 0x3);
@@ -141,11 +138,11 @@ msleep(2);
 
 write_lcd(0, 0x0c);	 //display on, cursor off, blink off
 write_lcd(0, 0xc0);
-write_lcd(1, 'H');
-write_lcd(1, 'a');
-write_lcd(1, 'l');
-write_lcd(1, 'l');
-write_lcd(1, 'o');
+//write_lcd(1, 'H');
+//write_lcd(1, 'a');
+//write_lcd(1, 'l');
+//write_lcd(1, 'l');
+//write_lcd(1, 'o');
 
 	return 0;
 
@@ -169,7 +166,12 @@ static int exit_display(void){
 	return 0;
 }
 
-
+/** @brief function is called when device is being written from user space
+ * @param: pointer to a file instance
+ * @param: buffer contains the string to write onto the device
+ * @param: size of array that is being passed in the const char buffer
+ * @param: offset if required
+ */
 static ssize_t driver_write(struct file *instance, const char __user *user, size_t cnt, loff_t *offset){
 
 	unsigned long not_copied; 
@@ -198,10 +200,14 @@ static ssize_t driver_write(struct file *instance, const char __user *user, size
 return to_copy-not_copied;
 }
 
+/** @brief Devices are represented as file structures in the kernel. 
+ * file_operation struct from /linux/fs.h lists the various callback 
+ * functions which can be associated with file operations 
+*/
 static struct file_operations fops = {
 	.owner = THIS_MODULE,
 	.open = init_display,
-	//.release = exit_display,
+	.release = driver_release,
 	.write = driver_write,
 	.unlocked_ioctl = function_ioctl,
 };
@@ -286,15 +292,23 @@ switch(cmd){
 return retval;
 }
 
-
-static int clear_display(void){
-	
+/** @brief release function is called whenever the device is closed/released  by
+ * @param inode: pointer to inode object (defined in linux/fs.h)
+ * @param filep: pointer to file object (defined in linux/fs.h)
+ */
+static int driver_release(struct inode *node, struct file *fp){
 	return 0;
 }
 
+
+/** @brief a module must use the module_init() and module_exit() macros from linux/init.h
+ * which identify the initialization function at insertion time and the 
+ * cleanup function (as listed above)
+ */
 module_init(mod_init);
 module_exit(mod_exit);
 
 MODULE_AUTHOR("Daniel Obermaier <mailto:dan.obermaier@gmail.com>");
 MODULE_DESCRIPTION("driver for LCD Display with HD44780 controller");
 MODULE_LICENSE("GPL");
+MODULE_VERSION("0.1");
