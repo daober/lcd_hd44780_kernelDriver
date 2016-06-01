@@ -21,6 +21,11 @@
 
 #include "ioctl_header.h"	//includes self-written IOCTL macros and linux/ioctl.h as well
 
+MODULE_AUTHOR("Daniel Obermaier <mailto:dan.obermaier@gmail.com>");			// author(s) -> visible when using modinfo
+MODULE_DESCRIPTION("driver for LCD Display with HD44780 controller");		// describtion -> visible when using modinfo
+MODULE_LICENSE("GPL");														// license type -> affects available functionality
+MODULE_VERSION("0.1");														// version number
+
 static int major = 0;
 static int minor = 0;
 static int count = 1;
@@ -46,6 +51,18 @@ static void __exit mod_exit(void);
 static int __init init_display(void);
 /*function prototypes end*/
 
+
+/** @brief Devices are represented as file structures in the kernel. 
+ * file_operation struct from /linux/fs.h lists the various callback 
+ * functions which can be associated with file operations 
+*/
+static struct file_operations fops = {
+	.owner = THIS_MODULE,
+	.open = init_display,
+	.release = driver_release,
+	.write = driver_write,
+	.unlocked_ioctl = function_ioctl,
+};
 
 //module parameters -> allow arguments to be passed to modules
 module_param(major, int, S_IRUGO | S_IWUSR);
@@ -200,17 +217,6 @@ static ssize_t driver_write(struct file *instance, const char __user *user, size
 return to_copy-not_copied;
 }
 
-/** @brief Devices are represented as file structures in the kernel. 
- * file_operation struct from /linux/fs.h lists the various callback 
- * functions which can be associated with file operations 
-*/
-static struct file_operations fops = {
-	.owner = THIS_MODULE,
-	.open = init_display,
-	.release = driver_release,
-	.write = driver_write,
-	.unlocked_ioctl = function_ioctl,
-};
 
 static int __init mod_init(void){
 int error = 0; 	
@@ -308,7 +314,4 @@ static int driver_release(struct inode *node, struct file *fp){
 module_init(mod_init);
 module_exit(mod_exit);
 
-MODULE_AUTHOR("Daniel Obermaier <mailto:dan.obermaier@gmail.com>");
-MODULE_DESCRIPTION("driver for LCD Display with HD44780 controller");
-MODULE_LICENSE("GPL");
-MODULE_VERSION("0.1");
+
