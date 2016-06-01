@@ -6,7 +6,6 @@
 #include <linux/init.h>		//for entry/exit macros to mark up functions e.g. __init __exit
 #include <linux/fs.h>		//header for the linux file system support
 #include <linux/cdev.h>
-#include <linux/ioctl.h>
 #include <linux/types.h>
 #include <linux/device.h>	//header to support the kernel module driver
 #include <linux/cdev.h>
@@ -15,13 +14,12 @@
 #include <linux/ctype.h>
 #include <asm/uaccess.h>	//required for copy_to_user() function
 #include <asm/errno.h>
-#include <linux/sched.h>	//used for scheduling
 #include <linux/wait.h>
 #include <linux/hrtimer.h>
 #include <linux/ktime.h>
 #include <linux/interrupt.h>
 
-#include "ioctl_header.h"	//includes self-written  macros
+#include "ioctl_header.h"	//includes self-written IOCTL macros and linux/ioctl.h as well
 
 static int major = 0;
 static int minor = 0;
@@ -138,8 +136,10 @@ msleep(2);
 
 write_lcd(0, 0x0c);	 //display on, cursor off, blink off
 write_lcd(0, 0xc0);
-//write_lcd(1, 'H');
-//write_lcd(1, 'a');
+//TESTS!!!!!!!!!!!!!!!!!
+
+//write_lcd(0, 0x41);
+//write_lcd(1, 'M');
 //write_lcd(1, 'l');
 //write_lcd(1, 'l');
 //write_lcd(1, 'o');
