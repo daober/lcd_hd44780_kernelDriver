@@ -3,7 +3,6 @@
 #include "errno.h"
 #include <unistd.h>
 #include <stdlib.h>
-//#include "sys/ioctl.h"
 
 #include "ioctl_header.h"
 
@@ -14,7 +13,7 @@ int cmd = 0;			//command
 char arg = 1;			//additional argument
 
 char s_write[100] = "im a userspace prog\n";
-int lcd_dev = open("/dev/hd44780", O_WRONLY);	//open device file
+int lcd_dev = open("/dev/hd44780", O_WRONLY);	//open device file -> WRITE ONLY
 
 //ioctl(lcd_dev, IOCTL_WRITE, buff); 
 
@@ -23,8 +22,6 @@ printf("0 = clear display\n");
 printf("1 = write value to display\n");
 printf("2 = show ip on display\n");
 printf("3 = exit\n");
-
-fflush(stdout);
 
 if(lcd_dev == -1){
 	printf("can't open device file\n");

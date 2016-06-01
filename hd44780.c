@@ -1,4 +1,12 @@
-
+/**
+ * @file	hd44780.c 
+ * @author	Daniel Obermaier, Victor Nagy, Markus Fischer
+ * @date	01. June 2016
+ * @version	0.1
+ * @brief	loadable kernel module character device driver for support a simple 2x16 lcd display.
+ * within the lcd display is a commonly used HD44780 controller implemented.
+ * @see https://www.sparkfun.com/datasheets/LCD/HD44780.pdf datasheet for this hd44780 controller  	  
+ */
 
 #include <linux/module.h>	//core header for loading LKMs into the kernel
 #include <linux/moduleparam.h>
@@ -43,12 +51,13 @@ static void write_lcd(int regist, int value);
 static int gpio_request_output(int nr);
 static int exit_display(void);
 
+/*special lkm function prototypes*/
+static void __exit mod_exit(void);
+static int __init init_display(void);
+
 //prototype functions for the character driver (callbacks)
 static long function_ioctl(struct file *fp, unsigned int cmd, unsigned long arg);
 static ssize_t driver_write(struct file *instance, const char __user *user, size_t cnt, loff_t *offset);
-static int driver_release(struct  inode *node, struct file *fp);
-static void __exit mod_exit(void);
-static int __init init_display(void);
 /*function prototypes end*/
 
 
@@ -58,8 +67,6 @@ static int __init init_display(void);
 */
 static struct file_operations fops = {
 	.owner = THIS_MODULE,
-	.open = init_display,
-	.release = driver_release,
 	.write = driver_write,
 	.unlocked_ioctl = function_ioctl,
 };
@@ -112,9 +119,8 @@ static int gpio_request_output(int nr){
 	return 0;
 }
 
-/** @brief device open function that is called each time the device 
-is opened */
-static int __init init_display(void){
+
+static int init_display(void){
 
 printk("initialize display\n");
 
@@ -218,6 +224,33 @@ return to_copy-not_copied;
 }
 
 
+static long function_ioctl(struct file *fp, unsigned int cmd, unsigned long arg){
+int retval = 0;
+int value = 5;
+
+switch(cmd){
+	case IOCTL_WRITE:
+//		put_user(value, (int *)arg);
+		printk("IOCTL_WRITE was selected\n");
+		break;
+//	case IOCTL_CLEAR:
+//		put_user(value, (int *)arg);
+//		printk("IOCTL_CLEAR was selected\n");
+//		break;
+	default:
+		printk("no argument was selected\n");
+		retval = -EFAULT;
+		break;
+	}
+return retval;
+}
+
+/** @brief kernel module initialization function
+ * the static keyword restricts the visibility of the function within this C file
+ * __init macro means that for a built-in driver (not a kernel module!) 
+ * is only used at initialization time and that it can be discarded and its memory freed after.
+ * @return returns 0 if successful
+ */
 static int __init mod_init(void){
 int error = 0; 	
 
@@ -267,6 +300,11 @@ free_device_number:
 	return -EIO;
 }
 
+
+/** @brief lkm exit function
+ * similiar to initialization function, it is static. __exit macro notifies 
+ * if code is used for a built-in driver (not a lkm) that this function is not required.
+ */ 
 static void __exit mod_exit(void){
 	dev_info(hd44780_dev, "mod_exit called\n");
 	exit_display();
@@ -275,35 +313,6 @@ static void __exit mod_exit(void){
 	cdev_del(driver_object);
 	unregister_chrdev_region(dev, 1);
 	return;
-}
-
-static long function_ioctl(struct file *fp, unsigned int cmd, unsigned long arg){
-int retval = 0;
-int value = 5;
-
-switch(cmd){
-	case IOCTL_WRITE:
-//		put_user(value, (int *)arg);
-		printk("IOCTL_WRITE was selected\n");
-		break;
-//	case IOCTL_CLEAR:
-//		put_user(value, (int *)arg);
-//		printk("IOCTL_CLEAR was selected\n");
-//		break;
-	default:
-		printk("no argument was selected\n");
-		retval = -EFAULT;
-		break;
-	}
-return retval;
-}
-
-/** @brief release function is called whenever the device is closed/released  by
- * @param inode: pointer to inode object (defined in linux/fs.h)
- * @param filep: pointer to file object (defined in linux/fs.h)
- */
-static int driver_release(struct inode *node, struct file *fp){
-	return 0;
 }
 
 
