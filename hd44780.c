@@ -56,7 +56,7 @@ static void __exit mod_exit(void);
 static int __init init_display(void);
 
 //prototype functions for the character driver (callbacks)
-static long function_ioctl(struct file *fp, unsigned int cmd, unsigned long arg);
+static long driver_ioctl(struct file *fp, unsigned int cmd, unsigned long arg);
 static ssize_t driver_write(struct file *instance, const char __user *user, size_t cnt, loff_t *offset);
 /*function prototypes end*/
 
@@ -68,7 +68,7 @@ static ssize_t driver_write(struct file *instance, const char __user *user, size
 static struct file_operations fops = {
 	.owner = THIS_MODULE,
 	.write = driver_write,
-	.unlocked_ioctl = function_ioctl,
+	.unlocked_ioctl = driver_ioctl,
 };
 
 //module parameters -> allow arguments to be passed to modules
@@ -224,7 +224,7 @@ return to_copy-not_copied;
 }
 
 
-static long function_ioctl(struct file *fp, unsigned int cmd, unsigned long arg){
+static long driver_ioctl(struct file *fp, unsigned int cmd, unsigned long arg){
 int retval = 0;
 int value = 5;
 
