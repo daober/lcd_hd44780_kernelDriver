@@ -7,37 +7,46 @@
  * to work with the device the /dev/hd44780 must be called
 */
 
-#include "stdio.h"
-#include "fcntl.h"
-#include "errno.h"
+#include <stdio.h>
+#include <fcntl.h>
+#include <errno.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include <string.h>
+#include <ctype.h>
 
 #include "ioctl_header.h"
 
 
 int main(int argc, char **argv){
 
-char buff[128];
+static const char* devname = "/dev/hd44780";
 
-char s_write[100] = "hello linuxloverboys!";
-int dev = open("/dev/hd44780", O_WRONLY);	//open device file -> WRITE ONLY
+int ret = 0;
+char buff[128] = "";
+int dev = 0;
 
-
-if(dev == -1){
-	printf("can't open device file\n");
-	return -1;
+if(argc != 2){ /*argc should be 2 for correct execution*/
+	printf("usage:  <filename> <string>\n");
 }
+else{
+	//assume argv[1] is the string to write	
+	int dev = open(devname, O_WRONLY);	//open device file -> WRITE ONLY
+	
+	ret = write(dev, "                                ", 32);	//clear display
+	if(dev == -1){
+		perror("can't open device file\n");
+		return -EIO;
+	}
 
-//try to write to device
-int ret = write(dev, s_write, 25);
+	ret = write(dev, argv[1], 128);	//write string to device
 
-if(ret < 0){
-	perror("cant write to devicefile\n");
-	return errno;
+	if(ret < 0){
+		perror("cant write to devicefile\n");
+		return EIO;
+	}
 }
-
 
 close(dev);		//close device afterwards
 

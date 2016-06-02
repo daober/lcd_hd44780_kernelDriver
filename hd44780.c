@@ -60,7 +60,6 @@ static int __init init_display(void);
 //prototype functions for the character driver (callbacks to/from user)
 static int dev_open(struct inode* inode, struct file *fp);
 static int dev_release(struct inode* inode, struct file *fp);
-static long dev_ioctl(struct file *fp, unsigned int cmd, unsigned long arg);
 static ssize_t dev_write(struct file *instance, const char __user *user, size_t cnt, loff_t *offset);
 /*function prototypes end*/
 
@@ -73,8 +72,7 @@ static struct file_operations fops = {
 	.owner = THIS_MODULE,
 	.open = dev_open,
 	.write = dev_write,
-	.unlocked_ioctl = dev_ioctl,
-	.release = dev_release
+	.release = dev_release		/* a.k.a close */
 };
 
 //module parameters -> allow arguments to be passed to modules
@@ -226,7 +224,7 @@ static ssize_t dev_write(struct file *instance, const char __user *user, size_t 
 	unsigned long to_copy;
 	int i;
 
-	char msg_from_user[26] = { 0 };
+	char msg_from_user[128] = { 0 };
 
 	to_copy = min(cnt, sizeof(textbuffer));
 	not_copied = copy_from_user(textbuffer, user, to_copy);
@@ -248,27 +246,6 @@ static ssize_t dev_write(struct file *instance, const char __user *user, size_t 
 return to_copy-not_copied;
 }
 
-
-static long dev_ioctl(struct file *fp, unsigned int cmd, unsigned long arg){
-int retval = 0;
-int value = 5;
-
-switch(cmd){
-	case IOCTL_WRITE:
-//		put_user(value, (int *)arg);
-		printk("IOCTL_WRITE was selected\n");
-		break;
-//	case IOCTL_CLEAR:
-//		put_user(value, (int *)arg);
-//		printk("IOCTL_CLEAR was selected\n");
-//		break;
-	default:
-		printk("no argument was selected\n");
-		retval = -EFAULT;
-		break;
-	}
-return retval;
-}
 
 /** @brief kernel module initialization function
  * the static keyword restricts the visibility of the function within this C file

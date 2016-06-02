@@ -39,6 +39,7 @@ __attribute__((section("__versions"))) = {
 	{ 0x11089ac7, __VMLINUX_SYMBOL_STR(_ctype) },
 	{ 0xfa2a45e, __VMLINUX_SYMBOL_STR(__memzero) },
 	{ 0x28cc25db, __VMLINUX_SYMBOL_STR(arm_copy_from_user) },
+	{ 0x5f754e5a, __VMLINUX_SYMBOL_STR(memset) },
 	{ 0x8e865d3c, __VMLINUX_SYMBOL_STR(arm_delay_ops) },
 	{ 0x6f1c13b2, __VMLINUX_SYMBOL_STR(gpiod_set_raw_value) },
 	{ 0xcd6b7707, __VMLINUX_SYMBOL_STR(gpio_to_desc) },
@@ -53,4 +54,4 @@ __attribute__((section(".modinfo"))) =
 "depends=";
 
 
-MODULE_INFO(srcversion, "CDC3FDC418180192F16DA99");
+MODULE_INFO(srcversion, "A3A494C7D9DC020D4B8D8AF");

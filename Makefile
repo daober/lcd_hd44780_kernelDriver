@@ -9,5 +9,8 @@ all:
 default:
 	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules
 
+user:
+	$(CC) usr-lcd-control.c -o usr-lcd-control
+
 clean:
 	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) clean
