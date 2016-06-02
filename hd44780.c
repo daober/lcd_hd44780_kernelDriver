@@ -196,6 +196,7 @@ static int exit_display(void){
 }
 
 static int dev_open(struct inode* inode, struct file *fp){
+printk(KERN_INFO "hd44780: device opened from user\n");
 
 dev_cnt++;	//increment counter	
 	//increment usage count
@@ -205,6 +206,7 @@ return 0;
 
 
 static int dev_release(struct inode* inode, struct file *fp){
+printk(KERN_INFO "hd44780: device closed from user\n");
 
 dev_cnt--;	
 	//decrement usage counter, or else the module cannot be closed properly

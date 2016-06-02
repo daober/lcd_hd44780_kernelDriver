@@ -1,0 +1,84 @@
+\hypertarget{hd44780_8c}{\section{/home/pi/\+Sys\+Prog/lcd-\/driver/hd44780.c File Reference}
+\label{hd44780_8c}\index{/home/pi/\+Sys\+Prog/lcd-\/driver/hd44780.\+c@{/home/pi/\+Sys\+Prog/lcd-\/driver/hd44780.\+c}}
+}
+
+
+loadable kernel module character device driver for support a simple 2x16 lcd display. within the lcd display is a commonly used H\+D44780 controller implemented.  
+
+
+{\ttfamily \#include $<$linux/module.\+h$>$}\\*
+{\ttfamily \#include $<$linux/moduleparam.\+h$>$}\\*
+{\ttfamily \#include $<$linux/kernel.\+h$>$}\\*
+{\ttfamily \#include $<$linux/init.\+h$>$}\\*
+{\ttfamily \#include $<$linux/fs.\+h$>$}\\*
+{\ttfamily \#include $<$linux/cdev.\+h$>$}\\*
+{\ttfamily \#include $<$linux/types.\+h$>$}\\*
+{\ttfamily \#include $<$linux/device.\+h$>$}\\*
+{\ttfamily \#include $<$linux/gpio.\+h$>$}\\*
+{\ttfamily \#include $<$linux/delay.\+h$>$}\\*
+{\ttfamily \#include $<$linux/ctype.\+h$>$}\\*
+{\ttfamily \#include $<$asm/uaccess.\+h$>$}\\*
+{\ttfamily \#include $<$asm/errno.\+h$>$}\\*
+{\ttfamily \#include $<$linux/wait.\+h$>$}\\*
+{\ttfamily \#include $<$linux/hrtimer.\+h$>$}\\*
+{\ttfamily \#include $<$linux/ktime.\+h$>$}\\*
+{\ttfamily \#include $<$linux/interrupt.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}ioctl\+\_\+header.\+h\char`\"{}}\\*
+Include dependency graph for hd44780.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{hd44780_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{hd44780_8c_abf13a12292da7acc4b17217fe0f37417}{{\bfseries M\+O\+D\+U\+L\+E\+\_\+\+A\+U\+T\+H\+O\+R} (\char`\"{}Daniel Obermaier $<$mailto\+:dan.\+obermaier@gmail.\+com$>$\char`\"{})}\label{hd44780_8c_abf13a12292da7acc4b17217fe0f37417}
+
+\item 
+\hypertarget{hd44780_8c_a3b308580fb76459a08a77c2394250426}{{\bfseries M\+O\+D\+U\+L\+E\+\_\+\+D\+E\+S\+C\+R\+I\+P\+T\+I\+O\+N} (\char`\"{}driver for L\+C\+D Display with H\+D44780 controller\char`\"{})}\label{hd44780_8c_a3b308580fb76459a08a77c2394250426}
+
+\item 
+\hypertarget{hd44780_8c_ad94b36675e7eb067ea3ce6ff9e244a44}{{\bfseries M\+O\+D\+U\+L\+E\+\_\+\+L\+I\+C\+E\+N\+S\+E} (\char`\"{}G\+P\+L\char`\"{})}\label{hd44780_8c_ad94b36675e7eb067ea3ce6ff9e244a44}
+
+\item 
+\hypertarget{hd44780_8c_a4b75c2cb371865e62f06fc635df9401e}{{\bfseries M\+O\+D\+U\+L\+E\+\_\+\+V\+E\+R\+S\+I\+O\+N} (\char`\"{}0.\+1\char`\"{})}\label{hd44780_8c_a4b75c2cb371865e62f06fc635df9401e}
+
+\item 
+\hypertarget{hd44780_8c_a1dc5174a07767c41761c513b9ba16422}{{\bfseries module\+\_\+param} (major, int, S\+\_\+\+I\+R\+U\+G\+O$\vert$S\+\_\+\+I\+W\+U\+S\+R)}\label{hd44780_8c_a1dc5174a07767c41761c513b9ba16422}
+
+\item 
+\hypertarget{hd44780_8c_aa3d8ce5316766e98caada6c877ded662}{{\bfseries module\+\_\+param} (count, int, S\+\_\+\+I\+R\+U\+G\+O$\vert$S\+\_\+\+I\+W\+U\+S\+R)}\label{hd44780_8c_aa3d8ce5316766e98caada6c877ded662}
+
+\item 
+\hypertarget{hd44780_8c_a63936a07c493d98700dad3cf37aa30de}{\hyperlink{hd44780_8c_a63936a07c493d98700dad3cf37aa30de}{module\+\_\+init} (mod\+\_\+init)}\label{hd44780_8c_a63936a07c493d98700dad3cf37aa30de}
+
+\begin{DoxyCompactList}\small\item\em a module must use the \hyperlink{hd44780_8c_a63936a07c493d98700dad3cf37aa30de}{module\+\_\+init()} and module\+\_\+exit() macros from linux/init.\+h which identify the initialization function at insertion time and the cleanup function (as listed above) \end{DoxyCompactList}\item 
+\hypertarget{hd44780_8c_a92f7251a3e21772c1063cb378ab99b3d}{{\bfseries module\+\_\+exit} (mod\+\_\+exit)}\label{hd44780_8c_a92f7251a3e21772c1063cb378ab99b3d}
+
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{hd44780_8c_a8910285a0352a5c710e65ec9ecbe32a1}{dev\+\_\+t {\bfseries dev} = 0}\label{hd44780_8c_a8910285a0352a5c710e65ec9ecbe32a1}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+loadable kernel module character device driver for support a simple 2x16 lcd display. within the lcd display is a commonly used H\+D44780 controller implemented. 
+
+\begin{DoxyAuthor}{Author}
+Daniel Obermaier, Victor Nagy, Markus Fischer 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+01. June 2016 
+\end{DoxyDate}
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+\begin{DoxySeeAlso}{See also}
+\href{https://www.sparkfun.com/datasheets/LCD/HD44780.pdf}{\tt https\+://www.\+sparkfun.\+com/datasheets/\+L\+C\+D/\+H\+D44780.\+pdf} datasheet for this hd44780 controller 
+\end{DoxySeeAlso}
