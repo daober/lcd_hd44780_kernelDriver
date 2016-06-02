@@ -40,7 +40,7 @@ static int count = 1;
 
 dev_t dev = 0;
 
-static int dev_open = 0; //is device open? used to prevent multiple access
+static int dev_cnt = 0; //is device open? used to prevent multiple access
 
 static struct cdev *driver_object;
 static struct class *hd44780_class;
@@ -58,10 +58,10 @@ static void __exit mod_exit(void);
 static int __init init_display(void);
 
 //prototype functions for the character driver (callbacks to/from user)
-static int driver_open(struct inode* inode, struct file *fp);
-static int driver_release(struct inode* inode, struct file *fp);
-static long driver_ioctl(struct file *fp, unsigned int cmd, unsigned long arg);
-static ssize_t driver_write(struct file *instance, const char __user *user, size_t cnt, loff_t *offset);
+static int dev_open(struct inode* inode, struct file *fp);
+static int dev_release(struct inode* inode, struct file *fp);
+static long dev_ioctl(struct file *fp, unsigned int cmd, unsigned long arg);
+static ssize_t dev_write(struct file *instance, const char __user *user, size_t cnt, loff_t *offset);
 /*function prototypes end*/
 
 
@@ -71,10 +71,10 @@ static ssize_t driver_write(struct file *instance, const char __user *user, size
 */
 static struct file_operations fops = {
 	.owner = THIS_MODULE,
-	.open = driver_open,
-	.write = driver_write,
-	.unlocked_ioctl = driver_ioctl,
-	.release = driver_release
+	.open = dev_open,
+	.write = dev_write,
+	.unlocked_ioctl = dev_ioctl,
+	.release = dev_release
 };
 
 //module parameters -> allow arguments to be passed to modules
@@ -195,18 +195,18 @@ static int exit_display(void){
 	return 0;
 }
 
-static int driver_open(struct inode* inode, struct file *fp){
+static int dev_open(struct inode* inode, struct file *fp){
 
-dev_open++;	//increment counter	
+dev_cnt++;	//increment counter	
 	//increment usage count
 
 return 0;	
 }
 
 
-static int driver_release(struct inode* inode, struct file *fp){
+static int dev_release(struct inode* inode, struct file *fp){
 
-dev_open--;	
+dev_cnt--;	
 	//decrement usage counter, or else the module cannot be closed properly
 
 return 0;
@@ -218,7 +218,7 @@ return 0;
  * @param: size of array that is being passed in the const char buffer
  * @param: offset if required
  */
-static ssize_t driver_write(struct file *instance, const char __user *user, size_t cnt, loff_t *offset){
+static ssize_t dev_write(struct file *instance, const char __user *user, size_t cnt, loff_t *offset){
 
 	unsigned long not_copied; 
 	unsigned long to_copy;
@@ -247,7 +247,7 @@ return to_copy-not_copied;
 }
 
 
-static long driver_ioctl(struct file *fp, unsigned int cmd, unsigned long arg){
+static long dev_ioctl(struct file *fp, unsigned int cmd, unsigned long arg){
 int retval = 0;
 int value = 5;
 
