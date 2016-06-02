@@ -40,6 +40,8 @@ static int count = 1;
 
 dev_t dev = 0;
 
+static int dev_open = 0; //is device open? used to prevent multiple access
+
 static struct cdev *driver_object;
 static struct class *hd44780_class;
 static struct device *hd44780_dev;
@@ -55,7 +57,9 @@ static int exit_display(void);
 static void __exit mod_exit(void);
 static int __init init_display(void);
 
-//prototype functions for the character driver (callbacks)
+//prototype functions for the character driver (callbacks to/from user)
+static int driver_open(struct inode* inode, struct file *fp);
+static int driver_release(struct inode* inode, struct file *fp);
 static long driver_ioctl(struct file *fp, unsigned int cmd, unsigned long arg);
 static ssize_t driver_write(struct file *instance, const char __user *user, size_t cnt, loff_t *offset);
 /*function prototypes end*/
@@ -67,8 +71,10 @@ static ssize_t driver_write(struct file *instance, const char __user *user, size
 */
 static struct file_operations fops = {
 	.owner = THIS_MODULE,
+	.open = driver_open,
 	.write = driver_write,
 	.unlocked_ioctl = driver_ioctl,
+	.release = driver_release
 };
 
 //module parameters -> allow arguments to be passed to modules
@@ -187,6 +193,23 @@ static int exit_display(void){
 	gpio_free(8);
 	gpio_free(7);
 	return 0;
+}
+
+static int driver_open(struct inode* inode, struct file *fp){
+
+dev_open++;	//increment counter	
+	//increment usage count
+
+return 0;	
+}
+
+
+static int driver_release(struct inode* inode, struct file *fp){
+
+dev_open--;	
+	//decrement usage counter, or else the module cannot be closed properly
+
+return 0;
 }
 
 /** @brief function is called when device is being written from user space
