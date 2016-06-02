@@ -163,14 +163,6 @@ msleep(2);
 
 write_lcd(0, 0x0c);	 //display on, cursor off, blink off
 write_lcd(0, 0xc0);
-//TESTS!!!!!!!!!!!!!!!!!
-
-//write_lcd(0, 0x41);
-//write_lcd(1, 'M');
-//write_lcd(1, 'l');
-//write_lcd(1, 'l');
-//write_lcd(1, 'o');
-
 	return 0;
 
 free24: gpio_free(24);
@@ -193,24 +185,24 @@ static int exit_display(void){
 	return 0;
 }
 
+
 static int dev_open(struct inode* inode, struct file *fp){
-printk(KERN_INFO "hd44780: device opened from user\n");
+	printk(KERN_INFO "hd44780: device opened from user\n");
 
-dev_cnt++;	//increment counter	
-	//increment usage count
+	dev_cnt++;	//increment counter	
 
-return 0;	
+	return 0;	
 }
 
 
 static int dev_release(struct inode* inode, struct file *fp){
-printk(KERN_INFO "hd44780: device closed from user\n");
+	printk(KERN_INFO "hd44780: device closed from user\n");
 
-dev_cnt--;	
-	//decrement usage counter, or else the module cannot be closed properly
+	dev_cnt--;	//decrement counter
 
-return 0;
+	return 0;
 }
+
 
 /** @brief function is called when device is being written from user space
  * @param: pointer to a file instance
@@ -229,21 +221,21 @@ static ssize_t dev_write(struct file *instance, const char __user *user, size_t 
 	to_copy = min(cnt, sizeof(textbuffer));
 	not_copied = copy_from_user(textbuffer, user, to_copy);
 
-	write_lcd(0, 0x80);
+	write_lcd(0, 0x80);		//set cursor to begin
 
 	for(i = 0; i < to_copy && textbuffer[i]; i++){
-		if(isprint(textbuffer[i])){
+		if(isprint(textbuffer[i])){			//checks, whether the passed character is printable 
 			write_lcd(1, textbuffer[i]);
 		}
 		if( i == 15){
-			write_lcd(0, 0xc0);
+			write_lcd(0, 0xc0);			//jump to second row of display
 		}
 	}
 
 	if(copy_from_user(msg_from_user, user, cnt)) {
 		printk("failed copy from user");
 	}
-return to_copy-not_copied;
+return to_copy-not_copied;				//returns how many characters are left -> returns 0 if everything is copied properly 
 }
 
 
