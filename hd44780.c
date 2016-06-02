@@ -67,7 +67,7 @@ static ssize_t dev_write(struct file *instance, const char __user *user, size_t 
 /** @brief Devices are represented as file structures in the kernel. 
  * file_operation struct from /linux/fs.h lists the various callback 
  * functions which can be associated with file operations 
-*/
+ */
 static struct file_operations fops = {
 	.owner = THIS_MODULE,
 	.open = dev_open,
@@ -81,10 +81,10 @@ module_param(count, int, S_IRUGO | S_IWUSR);
 
 
 /**
-* @brief writes 4-bit values to gpio
-* @param control character
-* @param value to write
-*/
+ * @brief writes 4-bit values to gpio
+ * @param control character
+ * @param value to write
+ */
 static void write_nibble(int regist, int value){
 
 	gpio_set_value(7, regist);
@@ -102,20 +102,20 @@ static void write_nibble(int regist, int value){
 }
 
 /**
-* @brief uses write_nibble to shift and reverse logic values
-* @param control character
-* @param value to write
-*/
+ * @brief uses write_nibble to shift and reverse logic values
+ * @param control character
+ * @param value to write
+ */
 static void write_lcd(int regist, int value){
 	write_nibble(regist, value >> 4); //HIGH-Nibble logic
 	write_nibble(regist, value & 0xf); //LOW-Nibble logic
 }
 
 /**
-* @brief checks if gpio can be written successfully
-* @param pin number of gpio to be requested 
-* @return request successful or not as integer
-*/
+ * @brief checks if gpio can be written successfully
+ * @param pin number of gpio to be requested 
+ * @return request successful or not as integer
+ */
 static int gpio_request_output(int nr){
 	
 	char gpio_name[12];
@@ -138,12 +138,11 @@ static int gpio_request_output(int nr){
 }
 
 /**
-* @brief initializes display as soon as the module is loaded into the kernel 
-* @return returns 0 if initializing is successful, otherwise <0
-* 
-* checks if every gpio can be requested successfully and write control bits to the lcd.
-* using sleep and delays to be sure writing is working problerly
-*/
+ * @brief initializes display as soon as the module is loaded into the kernel 
+ * @return returns 0 if initializing is successful, otherwise <0 
+ * checks if every gpio can be requested successfully and write control bits to the lcd.
+ * using sleep and delays to be sure writing is working problerly
+ */
 static int init_display(void){
 
 printk("initialize display\n");
@@ -195,9 +194,9 @@ free7: gpio_free(7);
 
 
 /**
-* @brief frees memory on every initialized gpio pin if module gets unloaded from kernel
-* called from kernel callbacks
-*/
+ * @brief frees memory on every initialized gpio pin if module gets unloaded from kernel
+ * called from kernel callbacks
+ */
 static int exit_display(void){
 	printk("exit display called\n");
 	gpio_free(25);
@@ -228,7 +227,7 @@ static int dev_open(struct inode* inode, struct file *fp){
  * will be called on closing the device
  * @param inode to device file
  * @param pointer to device file
-*/
+ */
 static int dev_release(struct inode* inode, struct file *fp){
 	printk(KERN_INFO "hd44780: device closed from user\n");
 
