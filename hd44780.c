@@ -1,5 +1,5 @@
 /**
- * @file	hd44780.c 
+ * @file
  * @author	Daniel Obermaier, Victor Nagy, Markus Fischer
  * @date	01. June 2016
  * @version	0.1
@@ -48,23 +48,95 @@ static struct device *hd44780_dev;
 static char textbuffer[1024];
 
 /*function prototypes start*/
+
+/** 
+ * @brief writes 4-bit values to gpio
+ *
+ * @param control character
+ * @param value to write
+ */
 static void write_nibble(int regist, int value);
+
+/**
+ * @brief uses write_nibble to shift and reverse logic values
+ *
+ * @param control character
+ * @param value to write
+ */
 static void write_lcd(int regist, int value);
+
+
+/**
+ * @brief checks if gpio can be written successfully
+ *
+ * @param pin number of gpio to be requested 
+ * @return request successful or not as integer
+ */
 static int gpio_request_output(int nr);
+
+/**
+ * @brief frees memory on every initialized gpio pin if module gets unloaded from kernel
+ *
+ * called from kernel callbacks
+ */
 static int exit_display(void);
 
 /*special lkm function prototypes*/
+
+/**
+ * @brief lkm exit function
+ *
+ * similiar to initialization function, it is static. __exit macro notifies 
+ * if code is used for a built-in driver (not a lkm) that this function is not required.
+ */ 
 static void __exit mod_exit(void);
+
+/**
+ * @brief initializes display as soon as the module is loaded into the kernel 
+ *
+ * @return returns 0 if initializing is successful, otherwise <0 
+ * checks if every gpio can be requested successfully and write control bits to the lcd.
+ * using sleep and delays to be sure writing is working problerly
+ */
 static int __init init_display(void);
 
-//prototype functions for the character driver (callbacks to/from user)
+/*prototype functions for the character driver (callbacks to/from user)*/
+
+/**
+ * @brief executed from user via userspace interface program and increment device counter
+ *
+ * will be called if device will be opened
+ * @param inode to device file
+ * @param pointer to device file
+ */
 static int dev_open(struct inode* inode, struct file *fp);
+
+
+/**
+ * @brief executed from user via userspace interface program and decrement device counter
+ *
+ * will be called on closing the device
+ * @param inode to device file
+ * @param pointer to device file
+ */
 static int dev_release(struct inode* inode, struct file *fp);
+
+/**
+ * @brief function is called when device is being written from user space
+ *
+ * @param pointer to a file instance
+ * @param buffer contains the string to write onto the device
+ * @param size of array that is being passed in the const char buffer
+ * @param offset if required
+ * @return number of characters left
+ */
 static ssize_t dev_write(struct file *instance, const char __user *user, size_t cnt, loff_t *offset);
 /*function prototypes end*/
 
 
-/** @brief Devices are represented as file structures in the kernel. 
+/** 
+ * @brief Devices are represented as file structures in the kernel.
+ * 
  * file_operation struct from /linux/fs.h lists the various callback 
  * functions which can be associated with file operations 
  */
@@ -80,8 +152,9 @@ module_param(major, int, S_IRUGO | S_IWUSR);
 module_param(count, int, S_IRUGO | S_IWUSR);
 
 
-/**
+/** 
  * @brief writes 4-bit values to gpio
+ *
  * @param control character
  * @param value to write
  */
@@ -103,6 +176,7 @@ static void write_nibble(int regist, int value){
 
 /**
  * @brief uses write_nibble to shift and reverse logic values
+ *
  * @param control character
  * @param value to write
  */
@@ -113,6 +187,7 @@ static void write_lcd(int regist, int value){
 
 /**
  * @brief checks if gpio can be written successfully
+ *
  * @param pin number of gpio to be requested 
  * @return request successful or not as integer
  */
@@ -139,6 +214,7 @@ static int gpio_request_output(int nr){
 
 /**
  * @brief initializes display as soon as the module is loaded into the kernel 
+ *
  * @return returns 0 if initializing is successful, otherwise <0 
  * checks if every gpio can be requested successfully and write control bits to the lcd.
  * using sleep and delays to be sure writing is working problerly
@@ -195,6 +271,7 @@ free7: gpio_free(7);
 
 /**
  * @brief frees memory on every initialized gpio pin if module gets unloaded from kernel
+ *
  * called from kernel callbacks
  */
 static int exit_display(void){
@@ -210,6 +287,7 @@ static int exit_display(void){
 
 /**
  * @brief executed from user via userspace interface program and increment device counter
+ *
  * will be called if device will be opened
  * @param inode to device file
  * @param pointer to device file
@@ -224,6 +302,7 @@ static int dev_open(struct inode* inode, struct file *fp){
 
 /**
  * @brief executed from user via userspace interface program and decrement device counter
+ *
  * will be called on closing the device
  * @param inode to device file
  * @param pointer to device file
@@ -237,7 +316,9 @@ static int dev_release(struct inode* inode, struct file *fp){
 }
 
 
-/** @brief function is called when device is being written from user space
+/**
+ * @brief function is called when device is being written from user space
+ *
  * @param pointer to a file instance
  * @param buffer contains the string to write onto the device
  * @param size of array that is being passed in the const char buffer
@@ -273,7 +354,9 @@ return to_copy-not_copied;				//returns how many characters are left -> returns 
 }
 
 
-/** @brief kernel module initialization function
+/**
+ * @brief kernel module initialization function
+ *
  * the static keyword restricts the visibility of the function within this C file
  * __init macro means that for a built-in driver (not a kernel module!) 
  * is only used at initialization time and that it can be discarded and its memory freed after.
@@ -329,7 +412,9 @@ free_device_number:
 }
 
 
-/** @brief lkm exit function
+/**
+ * @brief lkm exit function
+ *
  * similiar to initialization function, it is static. __exit macro notifies 
  * if code is used for a built-in driver (not a lkm) that this function is not required.
  */ 
@@ -344,7 +429,9 @@ static void __exit mod_exit(void){
 }
 
 
-/** @brief a module must use the module_init() and module_exit() macros from linux/init.h
+/**
+ *  @brief a module must use the module_init() and module_exit() macros from linux/init.h
+ *
  * which identify the initialization function at insertion time and the 
  * cleanup function (as listed above)
  */

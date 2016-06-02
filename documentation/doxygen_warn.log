@@ -1,0 +1,22 @@
+/home/pi/SysProg/lcd-driver/hd44780.c:106: warning: argument 'pointer' of command @param is not found in the argument list of dev_open(struct inode *inode, struct file *fp)
+/home/pi/SysProg/lcd-driver/hd44780.c:106: warning: The following parameters of dev_open(struct inode *inode, struct file *fp) are not documented:
+  parameter 'fp'
+/home/pi/SysProg/lcd-driver/hd44780.c:116: warning: argument 'pointer' of command @param is not found in the argument list of dev_release(struct inode *inode, struct file *fp)
+/home/pi/SysProg/lcd-driver/hd44780.c:116: warning: The following parameters of dev_release(struct inode *inode, struct file *fp) are not documented:
+  parameter 'fp'
+/home/pi/SysProg/lcd-driver/hd44780.c:125: warning: argument 'pointer' of command @param is not found in the argument list of dev_write(struct file *instance, const char __user *user, size_t cnt, loff_t *offset)
+/home/pi/SysProg/lcd-driver/hd44780.c:125: warning: argument 'buffer' of command @param is not found in the argument list of dev_write(struct file *instance, const char __user *user, size_t cnt, loff_t *offset)
+/home/pi/SysProg/lcd-driver/hd44780.c:125: warning: argument 'size' of command @param is not found in the argument list of dev_write(struct file *instance, const char __user *user, size_t cnt, loff_t *offset)
+/home/pi/SysProg/lcd-driver/hd44780.c:125: warning: The following parameters of dev_write(struct file *instance, const char __user *user, size_t cnt, loff_t *offset) are not documented:
+  parameter 'instance'
+  parameter 'user'
+  parameter 'cnt'
+/home/pi/SysProg/lcd-driver/hd44780.c:70: warning: argument 'pin' of command @param is not found in the argument list of gpio_request_output(int nr)
+/home/pi/SysProg/lcd-driver/hd44780.c:70: warning: The following parameters of gpio_request_output(int nr) are not documented:
+  parameter 'nr'
+/home/pi/SysProg/lcd-driver/hd44780.c:61: warning: argument 'control' of command @param is not found in the argument list of write_lcd(int regist, int value)
+/home/pi/SysProg/lcd-driver/hd44780.c:61: warning: The following parameters of write_lcd(int regist, int value) are not documented:
+  parameter 'regist'
+/home/pi/SysProg/lcd-driver/hd44780.c:53: warning: argument 'control' of command @param is not found in the argument list of write_nibble(int regist, int value)
+/home/pi/SysProg/lcd-driver/hd44780.c:53: warning: The following parameters of write_nibble(int regist, int value) are not documented:
+  parameter 'regist'

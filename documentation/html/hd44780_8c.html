@@ -128,22 +128,72 @@ Functions</h2></td></tr>
 <tr class="separator:ad94b36675e7eb067ea3ce6ff9e244a44"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4b75c2cb371865e62f06fc635df9401e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hd44780_8c.html#a4b75c2cb371865e62f06fc635df9401e">MODULE_VERSION</a> (&quot;0.1&quot;)</td></tr>
 <tr class="separator:a4b75c2cb371865e62f06fc635df9401e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1dc5174a07767c41761c513b9ba16422"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hd44780_8c.html#a1dc5174a07767c41761c513b9ba16422">module_param</a> (major, int, S_IRUGO|S_IWUSR)</td></tr>
-<tr class="memdesc:a1dc5174a07767c41761c513b9ba16422"><td class="mdescLeft">&#160;</td><td class="mdescRight">module parameters -&gt; allow arguments to be passed to modules  <a href="#a1dc5174a07767c41761c513b9ba16422">More...</a><br /></td></tr>
+<tr class="memitem:a0eab6f129d21added23841a39571dea3"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hd44780_8c.html#a0eab6f129d21added23841a39571dea3">write_nibble</a> (int regist, int value)</td></tr>
+<tr class="memdesc:a0eab6f129d21added23841a39571dea3"><td class="mdescLeft">&#160;</td><td class="mdescRight">writes 4-bit values to gpio  <a href="#a0eab6f129d21added23841a39571dea3">More...</a><br /></td></tr>
+<tr class="separator:a0eab6f129d21added23841a39571dea3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0b6133b70bc190065133c49eb16f55f"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hd44780_8c.html#ae0b6133b70bc190065133c49eb16f55f">write_lcd</a> (int regist, int value)</td></tr>
+<tr class="memdesc:ae0b6133b70bc190065133c49eb16f55f"><td class="mdescLeft">&#160;</td><td class="mdescRight">uses write_nibble to shift and reverse logic values  <a href="#ae0b6133b70bc190065133c49eb16f55f">More...</a><br /></td></tr>
+<tr class="separator:ae0b6133b70bc190065133c49eb16f55f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abedd5fbc5004aefc727091a522a79391"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hd44780_8c.html#abedd5fbc5004aefc727091a522a79391">gpio_request_output</a> (int nr)</td></tr>
+<tr class="memdesc:abedd5fbc5004aefc727091a522a79391"><td class="mdescLeft">&#160;</td><td class="mdescRight">checks if gpio can be written successfully  <a href="#abedd5fbc5004aefc727091a522a79391">More...</a><br /></td></tr>
+<tr class="separator:abedd5fbc5004aefc727091a522a79391"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaeb9d01b89561b7086b450105ecd32fe"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hd44780_8c.html#aaeb9d01b89561b7086b450105ecd32fe">exit_display</a> (void)</td></tr>
+<tr class="memdesc:aaeb9d01b89561b7086b450105ecd32fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">frees memory on every initialized gpio pin if module gets unloaded from kernel  <a href="#aaeb9d01b89561b7086b450105ecd32fe">More...</a><br /></td></tr>
+<tr class="separator:aaeb9d01b89561b7086b450105ecd32fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39f7f81eb9dcc1767834f259f32979ba"><td class="memItemLeft" align="right" valign="top">static void __exit&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hd44780_8c.html#a39f7f81eb9dcc1767834f259f32979ba">mod_exit</a> (void)</td></tr>
+<tr class="memdesc:a39f7f81eb9dcc1767834f259f32979ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">lkm exit function  <a href="#a39f7f81eb9dcc1767834f259f32979ba">More...</a><br /></td></tr>
+<tr class="separator:a39f7f81eb9dcc1767834f259f32979ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a56a4067c846fe4fc7959a60d87b8b0f1"><td class="memItemLeft" align="right" valign="top">static int __init&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hd44780_8c.html#a56a4067c846fe4fc7959a60d87b8b0f1">init_display</a> (void)</td></tr>
+<tr class="memdesc:a56a4067c846fe4fc7959a60d87b8b0f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">initializes display as soon as the module is loaded into the kernel  <a href="#a56a4067c846fe4fc7959a60d87b8b0f1">More...</a><br /></td></tr>
+<tr class="separator:a56a4067c846fe4fc7959a60d87b8b0f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1ec1faa20fcdd72008800756f5f5134"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hd44780_8c.html#aa1ec1faa20fcdd72008800756f5f5134">dev_open</a> (struct inode *inode, struct file *fp)</td></tr>
+<tr class="memdesc:aa1ec1faa20fcdd72008800756f5f5134"><td class="mdescLeft">&#160;</td><td class="mdescRight">executed from user via userspace interface program and increment device counter  <a href="#aa1ec1faa20fcdd72008800756f5f5134">More...</a><br /></td></tr>
+<tr class="separator:aa1ec1faa20fcdd72008800756f5f5134"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b207bce4fc5e05120e630d1c4bb6377"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hd44780_8c.html#a6b207bce4fc5e05120e630d1c4bb6377">dev_release</a> (struct inode *inode, struct file *fp)</td></tr>
+<tr class="memdesc:a6b207bce4fc5e05120e630d1c4bb6377"><td class="mdescLeft">&#160;</td><td class="mdescRight">executed from user via userspace interface program and decrement device counter  <a href="#a6b207bce4fc5e05120e630d1c4bb6377">More...</a><br /></td></tr>
+<tr class="separator:a6b207bce4fc5e05120e630d1c4bb6377"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a23ebf6135f28b8d3c3e693971b9e2333"><td class="memItemLeft" align="right" valign="top">static ssize_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hd44780_8c.html#a23ebf6135f28b8d3c3e693971b9e2333">dev_write</a> (struct file *instance, const char __user *user, size_t cnt, loff_t *offset)</td></tr>
+<tr class="memdesc:a23ebf6135f28b8d3c3e693971b9e2333"><td class="mdescLeft">&#160;</td><td class="mdescRight">function is called when device is being written from user space  <a href="#a23ebf6135f28b8d3c3e693971b9e2333">More...</a><br /></td></tr>
+<tr class="separator:a23ebf6135f28b8d3c3e693971b9e2333"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1dc5174a07767c41761c513b9ba16422"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hd44780_8c.html#a1dc5174a07767c41761c513b9ba16422">module_param</a> (<a class="el" href="hd44780_8c.html#ac8947941479c38403a09c14a60b03f01">major</a>, int, S_IRUGO|S_IWUSR)</td></tr>
 <tr class="separator:a1dc5174a07767c41761c513b9ba16422"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa3d8ce5316766e98caada6c877ded662"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hd44780_8c.html#aa3d8ce5316766e98caada6c877ded662">module_param</a> (count, int, S_IRUGO|S_IWUSR)</td></tr>
+<tr class="memitem:aa3d8ce5316766e98caada6c877ded662"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hd44780_8c.html#aa3d8ce5316766e98caada6c877ded662">module_param</a> (<a class="el" href="hd44780_8c.html#ad43c3812e6d13e0518d9f8b8f463ffcf">count</a>, int, S_IRUGO|S_IWUSR)</td></tr>
 <tr class="separator:aa3d8ce5316766e98caada6c877ded662"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a63936a07c493d98700dad3cf37aa30de"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hd44780_8c.html#a63936a07c493d98700dad3cf37aa30de">module_init</a> (mod_init)</td></tr>
-<tr class="memdesc:a63936a07c493d98700dad3cf37aa30de"><td class="mdescLeft">&#160;</td><td class="mdescRight">a module must use the <a class="el" href="hd44780_8c.html#a63936a07c493d98700dad3cf37aa30de" title="a module must use the module_init() and module_exit() macros from linux/init.h which identify the ini...">module_init()</a> and <a class="el" href="hd44780_8c.html#a92f7251a3e21772c1063cb378ab99b3d">module_exit()</a> macros from linux/init.h which identify the initialization function at insertion time and the cleanup function (as listed above)  <a href="#a63936a07c493d98700dad3cf37aa30de">More...</a><br /></td></tr>
+<tr class="memitem:a2b796de854877d3b6e8e9c73a8c60c00"><td class="memItemLeft" align="right" valign="top">static int __init&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hd44780_8c.html#a2b796de854877d3b6e8e9c73a8c60c00">mod_init</a> (void)</td></tr>
+<tr class="memdesc:a2b796de854877d3b6e8e9c73a8c60c00"><td class="mdescLeft">&#160;</td><td class="mdescRight">kernel module initialization function  <a href="#a2b796de854877d3b6e8e9c73a8c60c00">More...</a><br /></td></tr>
+<tr class="separator:a2b796de854877d3b6e8e9c73a8c60c00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63936a07c493d98700dad3cf37aa30de"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hd44780_8c.html#a63936a07c493d98700dad3cf37aa30de">module_init</a> (<a class="el" href="hd44780_8c.html#a2b796de854877d3b6e8e9c73a8c60c00">mod_init</a>)</td></tr>
+<tr class="memdesc:a63936a07c493d98700dad3cf37aa30de"><td class="mdescLeft">&#160;</td><td class="mdescRight">a module must use the <a class="el" href="hd44780_8c.html#a63936a07c493d98700dad3cf37aa30de" title="a module must use the module_init() and module_exit() macros from linux/init.h ">module_init()</a> and <a class="el" href="hd44780_8c.html#a92f7251a3e21772c1063cb378ab99b3d">module_exit()</a> macros from linux/init.h  <a href="#a63936a07c493d98700dad3cf37aa30de">More...</a><br /></td></tr>
 <tr class="separator:a63936a07c493d98700dad3cf37aa30de"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a92f7251a3e21772c1063cb378ab99b3d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hd44780_8c.html#a92f7251a3e21772c1063cb378ab99b3d">module_exit</a> (mod_exit)</td></tr>
+<tr class="memitem:a92f7251a3e21772c1063cb378ab99b3d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hd44780_8c.html#a92f7251a3e21772c1063cb378ab99b3d">module_exit</a> (<a class="el" href="hd44780_8c.html#a39f7f81eb9dcc1767834f259f32979ba">mod_exit</a>)</td></tr>
 <tr class="separator:a92f7251a3e21772c1063cb378ab99b3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
+<tr class="memitem:ac8947941479c38403a09c14a60b03f01"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hd44780_8c.html#ac8947941479c38403a09c14a60b03f01">major</a> = 0</td></tr>
+<tr class="memdesc:ac8947941479c38403a09c14a60b03f01"><td class="mdescLeft">&#160;</td><td class="mdescRight">major number as an lkm identifier  <a href="#ac8947941479c38403a09c14a60b03f01">More...</a><br /></td></tr>
+<tr class="separator:ac8947941479c38403a09c14a60b03f01"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec7b96885baf2e6f10efbdef9d935a0b"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hd44780_8c.html#aec7b96885baf2e6f10efbdef9d935a0b">minor</a> = 0</td></tr>
+<tr class="separator:aec7b96885baf2e6f10efbdef9d935a0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad43c3812e6d13e0518d9f8b8f463ffcf"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hd44780_8c.html#ad43c3812e6d13e0518d9f8b8f463ffcf">count</a> = 1</td></tr>
+<tr class="separator:ad43c3812e6d13e0518d9f8b8f463ffcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8910285a0352a5c710e65ec9ecbe32a1"><td class="memItemLeft" align="right" valign="top">dev_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hd44780_8c.html#a8910285a0352a5c710e65ec9ecbe32a1">dev</a> = 0</td></tr>
 <tr class="memdesc:a8910285a0352a5c710e65ec9ecbe32a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">variable for lcd device  <a href="#a8910285a0352a5c710e65ec9ecbe32a1">More...</a><br /></td></tr>
 <tr class="separator:a8910285a0352a5c710e65ec9ecbe32a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd20d9c5f02b616c3c3cb41892e3f5d3"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hd44780_8c.html#afd20d9c5f02b616c3c3cb41892e3f5d3">dev_cnt</a> = 0</td></tr>
+<tr class="memdesc:afd20d9c5f02b616c3c3cb41892e3f5d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">used to prevent multiple access  <a href="#afd20d9c5f02b616c3c3cb41892e3f5d3">More...</a><br /></td></tr>
+<tr class="separator:afd20d9c5f02b616c3c3cb41892e3f5d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a628c122c638ae60b0c6d8a30c4e55b46"><td class="memItemLeft" align="right" valign="top">static struct cdev *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hd44780_8c.html#a628c122c638ae60b0c6d8a30c4e55b46">driver_object</a></td></tr>
+<tr class="separator:a628c122c638ae60b0c6d8a30c4e55b46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2924ecef65e0b40dc3dfab97f5a18b2f"><td class="memItemLeft" align="right" valign="top">static struct class *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hd44780_8c.html#a2924ecef65e0b40dc3dfab97f5a18b2f">hd44780_class</a></td></tr>
+<tr class="separator:a2924ecef65e0b40dc3dfab97f5a18b2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f39d148808b935cc26697ba64f38127"><td class="memItemLeft" align="right" valign="top">static struct device *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hd44780_8c.html#a7f39d148808b935cc26697ba64f38127">hd44780_dev</a></td></tr>
+<tr class="separator:a7f39d148808b935cc26697ba64f38127"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21566485093f5feef65ee0fc7a32a91e"><td class="memItemLeft" align="right" valign="top">static char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hd44780_8c.html#a21566485093f5feef65ee0fc7a32a91e">textbuffer</a> [1024]</td></tr>
+<tr class="separator:a21566485093f5feef65ee0fc7a32a91e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28ee7ed9613033920e733c9da671f79c"><td class="memItemLeft" align="right" valign="top">static struct file_operations&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hd44780_8c.html#a28ee7ed9613033920e733c9da671f79c">fops</a></td></tr>
+<tr class="memdesc:a28ee7ed9613033920e733c9da671f79c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Devices are represented as file structures in the kernel.  <a href="#a28ee7ed9613033920e733c9da671f79c">More...</a><br /></td></tr>
+<tr class="separator:a28ee7ed9613033920e733c9da671f79c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>loadable kernel module character device driver for support a simple 2x16 lcd display. within the lcd display is a commonly used HD44780 controller implemented. </p>
@@ -152,6 +202,488 @@ Variables</h2></td></tr>
 <dl class="section version"><dt>Version</dt><dd>0.1 </dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a href="https://www.sparkfun.com/datasheets/LCD/HD44780.pdf">https://www.sparkfun.com/datasheets/LCD/HD44780.pdf</a> datasheet for this hd44780 controller </dd></dl>
 </div><h2 class="groupheader">Function Documentation</h2>
+<a class="anchor" id="aa1ec1faa20fcdd72008800756f5f5134"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static int dev_open </td>
+          <td>(</td>
+          <td class="paramtype">struct inode *&#160;</td>
+          <td class="paramname"><em>inode</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct file *&#160;</td>
+          <td class="paramname"><em>fp</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>executed from user via userspace interface program and increment device counter </p>
+<p>will be called if device will be opened </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">inode</td><td>to device file </td></tr>
+    <tr><td class="paramname">pointer</td><td>to device file </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="fragment"><div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;                                                         {</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;    printk(KERN_INFO <span class="stringliteral">&quot;hd44780: device opened from user\n&quot;</span>);</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;    <a class="code" href="hd44780_8c.html#afd20d9c5f02b616c3c3cb41892e3f5d3">dev_cnt</a>++;  <span class="comment">//increment counter </span></div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;    <span class="keywordflow">return</span> 0;   </div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;}</div>
+<div class="ttc" id="hd44780_8c_html_afd20d9c5f02b616c3c3cb41892e3f5d3"><div class="ttname"><a href="hd44780_8c.html#afd20d9c5f02b616c3c3cb41892e3f5d3">dev_cnt</a></div><div class="ttdeci">static int dev_cnt</div><div class="ttdoc">used to prevent multiple access </div><div class="ttdef"><b>Definition:</b> hd44780.c:43</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="a6b207bce4fc5e05120e630d1c4bb6377"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static int dev_release </td>
+          <td>(</td>
+          <td class="paramtype">struct inode *&#160;</td>
+          <td class="paramname"><em>inode</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct file *&#160;</td>
+          <td class="paramname"><em>fp</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>executed from user via userspace interface program and decrement device counter </p>
+<p>will be called on closing the device </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">inode</td><td>to device file </td></tr>
+    <tr><td class="paramname">pointer</td><td>to device file </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="fragment"><div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;                                                            {</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;    printk(KERN_INFO <span class="stringliteral">&quot;hd44780: device closed from user\n&quot;</span>);</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;    <a class="code" href="hd44780_8c.html#afd20d9c5f02b616c3c3cb41892e3f5d3">dev_cnt</a>--;  <span class="comment">//decrement counter</span></div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;}</div>
+<div class="ttc" id="hd44780_8c_html_afd20d9c5f02b616c3c3cb41892e3f5d3"><div class="ttname"><a href="hd44780_8c.html#afd20d9c5f02b616c3c3cb41892e3f5d3">dev_cnt</a></div><div class="ttdeci">static int dev_cnt</div><div class="ttdoc">used to prevent multiple access </div><div class="ttdef"><b>Definition:</b> hd44780.c:43</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="a23ebf6135f28b8d3c3e693971b9e2333"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static ssize_t dev_write </td>
+          <td>(</td>
+          <td class="paramtype">struct file *&#160;</td>
+          <td class="paramname"><em>instance</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char __user *&#160;</td>
+          <td class="paramname"><em>user</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>cnt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">loff_t *&#160;</td>
+          <td class="paramname"><em>offset</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>function is called when device is being written from user space </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pointer</td><td>to a file instance </td></tr>
+    <tr><td class="paramname">buffer</td><td>contains the string to write onto the device </td></tr>
+    <tr><td class="paramname">size</td><td>of array that is being passed in the const char buffer </td></tr>
+    <tr><td class="paramname">offset</td><td>if required </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>number of characters left </dd></dl>
+<div class="fragment"><div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;                                                                                                    {</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> not_copied; </div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> to_copy;</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;    <span class="keywordtype">int</span> i;</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;    <span class="keywordtype">char</span> msg_from_user[128] = { 0 };</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;    to_copy = min(cnt, <span class="keyword">sizeof</span>(<a class="code" href="hd44780_8c.html#a21566485093f5feef65ee0fc7a32a91e">textbuffer</a>));</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;    not_copied = copy_from_user(<a class="code" href="hd44780_8c.html#a21566485093f5feef65ee0fc7a32a91e">textbuffer</a>, user, to_copy);</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;</div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;    <a class="code" href="hd44780_8c.html#ae0b6133b70bc190065133c49eb16f55f">write_lcd</a>(0, 0x80);     <span class="comment">//set cursor to begin</span></div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;    <span class="keywordflow">for</span>(i = 0; i &lt; to_copy &amp;&amp; <a class="code" href="hd44780_8c.html#a21566485093f5feef65ee0fc7a32a91e">textbuffer</a>[i]; i++){</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;        <span class="keywordflow">if</span>(isprint(textbuffer[i])){         <span class="comment">//checks, whether the passed character is printable </span></div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;            <a class="code" href="hd44780_8c.html#ae0b6133b70bc190065133c49eb16f55f">write_lcd</a>(1, textbuffer[i]);</div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;        }</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;        <span class="keywordflow">if</span>( i == 15){</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;            <a class="code" href="hd44780_8c.html#ae0b6133b70bc190065133c49eb16f55f">write_lcd</a>(0, 0xc0);         <span class="comment">//jump to second row of display</span></div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;        }</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;    }</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;</div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;    <span class="keywordflow">if</span>(copy_from_user(msg_from_user, user, cnt)) {</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;        printk(<span class="stringliteral">&quot;failed copy from user&quot;</span>);</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;    }</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;<span class="keywordflow">return</span> to_copy-not_copied;              <span class="comment">//returns how many characters are left -&gt; returns 0 if everything is copied properly </span></div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;}</div>
+<div class="ttc" id="hd44780_8c_html_ae0b6133b70bc190065133c49eb16f55f"><div class="ttname"><a href="hd44780_8c.html#ae0b6133b70bc190065133c49eb16f55f">write_lcd</a></div><div class="ttdeci">static void write_lcd(int regist, int value)</div><div class="ttdoc">uses write_nibble to shift and reverse logic values </div><div class="ttdef"><b>Definition:</b> hd44780.c:183</div></div>
+<div class="ttc" id="hd44780_8c_html_a21566485093f5feef65ee0fc7a32a91e"><div class="ttname"><a href="hd44780_8c.html#a21566485093f5feef65ee0fc7a32a91e">textbuffer</a></div><div class="ttdeci">static char textbuffer[1024]</div><div class="ttdef"><b>Definition:</b> hd44780.c:48</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="aaeb9d01b89561b7086b450105ecd32fe"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static int exit_display </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>frees memory on every initialized gpio pin if module gets unloaded from kernel </p>
+<p>called from kernel callbacks </p>
+<div class="fragment"><div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;                             {</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;    printk(<span class="stringliteral">&quot;exit display called\n&quot;</span>);</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;    gpio_free(25);</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;    gpio_free(24);</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;    gpio_free(23);</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;    gpio_free(18);</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;    gpio_free(8);</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;    gpio_free(7);</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="abedd5fbc5004aefc727091a522a79391"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static int gpio_request_output </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>nr</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>checks if gpio can be written successfully </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pin</td><td>number of gpio to be requested </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>request successful or not as integer </dd></dl>
+<div class="fragment"><div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;                                      {</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;    </div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    <span class="keywordtype">char</span> gpio_name[12];</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    <span class="keywordtype">int</span> err = 0;</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;    snprintf( gpio_name, <span class="keyword">sizeof</span>(gpio_name), <span class="stringliteral">&quot;rpi-gpio-%d&quot;</span>, nr);</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;    err = gpio_request(nr, gpio_name);</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;    <span class="keywordflow">if</span>(err){</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;        printk(<span class="stringliteral">&quot;gpio request for %s failed with %d\n&quot;</span>, gpio_name, err);</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;        <span class="keywordflow">return</span> err;</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;    }</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;    err = gpio_direction_output(nr, 0);</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;    <span class="keywordflow">if</span>(err){</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;        printk(<span class="stringliteral">&quot;gpio direction output failed %d\n&quot;</span>, err);</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;        gpio_free(nr);</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;        <span class="keywordflow">return</span> err;</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;    }</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;    <span class="keywordflow">return</span> err;</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="a56a4067c846fe4fc7959a60d87b8b0f1"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static int init_display </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>initializes display as soon as the module is loaded into the kernel </p>
+<dl class="section return"><dt>Returns</dt><dd>returns 0 if initializing is successful, otherwise &lt;0 checks if every gpio can be requested successfully and write control bits to the lcd. using sleep and delays to be sure writing is working problerly </dd></dl>
+<div class="fragment"><div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;                             {</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;printk(<span class="stringliteral">&quot;initialize display\n&quot;</span>);</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;<span class="keywordflow">if</span>(<a class="code" href="hd44780_8c.html#abedd5fbc5004aefc727091a522a79391">gpio_request_output</a>(7) == -1){</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;     <span class="keywordflow">return</span> -EIO;</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;}</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;<span class="keywordflow">if</span>(<a class="code" href="hd44780_8c.html#abedd5fbc5004aefc727091a522a79391">gpio_request_output</a>(8) == -1){</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;    <span class="keywordflow">goto</span> free7;</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;}</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;<span class="keywordflow">if</span>(<a class="code" href="hd44780_8c.html#abedd5fbc5004aefc727091a522a79391">gpio_request_output</a>(18) == -1){</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;    <span class="keywordflow">goto</span> free8;</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;}</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;<span class="keywordflow">if</span>(<a class="code" href="hd44780_8c.html#abedd5fbc5004aefc727091a522a79391">gpio_request_output</a>(23) == -1){</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;    <span class="keywordflow">goto</span> free18;</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;}</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;<span class="keywordflow">if</span>(<a class="code" href="hd44780_8c.html#abedd5fbc5004aefc727091a522a79391">gpio_request_output</a>(24) == -1){</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;    <span class="keywordflow">goto</span> free23;</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;}</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;<span class="keywordflow">if</span>(<a class="code" href="hd44780_8c.html#abedd5fbc5004aefc727091a522a79391">gpio_request_output</a>(25) == -1){</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;    <span class="keywordflow">goto</span> free24;</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;}</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;msleep(15);</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;<a class="code" href="hd44780_8c.html#a0eab6f129d21added23841a39571dea3">write_nibble</a>(0, 0x3);</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;msleep(5);</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;<a class="code" href="hd44780_8c.html#a0eab6f129d21added23841a39571dea3">write_nibble</a>(0, 0x3);</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;udelay(100);</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;<a class="code" href="hd44780_8c.html#a0eab6f129d21added23841a39571dea3">write_nibble</a>(0, 0x3);</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;msleep(5);</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;<a class="code" href="hd44780_8c.html#a0eab6f129d21added23841a39571dea3">write_nibble</a>(0, 0x2);</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;msleep(5);</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;<a class="code" href="hd44780_8c.html#ae0b6133b70bc190065133c49eb16f55f">write_lcd</a>(0, 0x28); <span class="comment">//Command: 4-Bit Mode, 2 lines</span></div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;msleep(2);</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;<a class="code" href="hd44780_8c.html#ae0b6133b70bc190065133c49eb16f55f">write_lcd</a>(0, 0x01);</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;msleep(2);</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;<a class="code" href="hd44780_8c.html#ae0b6133b70bc190065133c49eb16f55f">write_lcd</a>(0, 0x0c);  <span class="comment">//display on, cursor off, blink off</span></div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;<a class="code" href="hd44780_8c.html#ae0b6133b70bc190065133c49eb16f55f">write_lcd</a>(0, 0xc0);</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;free24: gpio_free(24);</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;free23: gpio_free(23);</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;free18: gpio_free(18);</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;free8: gpio_free(8);</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;free7: gpio_free(7);</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;    <span class="keywordflow">return</span> -EIO;</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;}</div>
+<div class="ttc" id="hd44780_8c_html_ae0b6133b70bc190065133c49eb16f55f"><div class="ttname"><a href="hd44780_8c.html#ae0b6133b70bc190065133c49eb16f55f">write_lcd</a></div><div class="ttdeci">static void write_lcd(int regist, int value)</div><div class="ttdoc">uses write_nibble to shift and reverse logic values </div><div class="ttdef"><b>Definition:</b> hd44780.c:183</div></div>
+<div class="ttc" id="hd44780_8c_html_abedd5fbc5004aefc727091a522a79391"><div class="ttname"><a href="hd44780_8c.html#abedd5fbc5004aefc727091a522a79391">gpio_request_output</a></div><div class="ttdeci">static int gpio_request_output(int nr)</div><div class="ttdoc">checks if gpio can be written successfully </div><div class="ttdef"><b>Definition:</b> hd44780.c:194</div></div>
+<div class="ttc" id="hd44780_8c_html_a0eab6f129d21added23841a39571dea3"><div class="ttname"><a href="hd44780_8c.html#a0eab6f129d21added23841a39571dea3">write_nibble</a></div><div class="ttdeci">static void write_nibble(int regist, int value)</div><div class="ttdoc">writes 4-bit values to gpio </div><div class="ttdef"><b>Definition:</b> hd44780.c:161</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="a39f7f81eb9dcc1767834f259f32979ba"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void __exit mod_exit </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>lkm exit function </p>
+<p>similiar to initialization function, it is static. __exit macro notifies if code is used for a built-in driver (not a lkm) that this function is not required. </p>
+<div class="fragment"><div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;                                 {</div>
+<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;    dev_info(<a class="code" href="hd44780_8c.html#a7f39d148808b935cc26697ba64f38127">hd44780_dev</a>, <span class="stringliteral">&quot;mod_exit called\n&quot;</span>);</div>
+<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;    <a class="code" href="hd44780_8c.html#aaeb9d01b89561b7086b450105ecd32fe">exit_display</a>();</div>
+<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;    device_destroy(<a class="code" href="hd44780_8c.html#a2924ecef65e0b40dc3dfab97f5a18b2f">hd44780_class</a>, <a class="code" href="hd44780_8c.html#a8910285a0352a5c710e65ec9ecbe32a1">dev</a>);</div>
+<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;    class_destroy(<a class="code" href="hd44780_8c.html#a2924ecef65e0b40dc3dfab97f5a18b2f">hd44780_class</a>);</div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;    cdev_del(<a class="code" href="hd44780_8c.html#a628c122c638ae60b0c6d8a30c4e55b46">driver_object</a>);</div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;    unregister_chrdev_region(<a class="code" href="hd44780_8c.html#a8910285a0352a5c710e65ec9ecbe32a1">dev</a>, 1);</div>
+<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;    <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;}</div>
+<div class="ttc" id="hd44780_8c_html_a8910285a0352a5c710e65ec9ecbe32a1"><div class="ttname"><a href="hd44780_8c.html#a8910285a0352a5c710e65ec9ecbe32a1">dev</a></div><div class="ttdeci">dev_t dev</div><div class="ttdoc">variable for lcd device </div><div class="ttdef"><b>Definition:</b> hd44780.c:41</div></div>
+<div class="ttc" id="hd44780_8c_html_a7f39d148808b935cc26697ba64f38127"><div class="ttname"><a href="hd44780_8c.html#a7f39d148808b935cc26697ba64f38127">hd44780_dev</a></div><div class="ttdeci">static struct device * hd44780_dev</div><div class="ttdef"><b>Definition:</b> hd44780.c:47</div></div>
+<div class="ttc" id="hd44780_8c_html_a2924ecef65e0b40dc3dfab97f5a18b2f"><div class="ttname"><a href="hd44780_8c.html#a2924ecef65e0b40dc3dfab97f5a18b2f">hd44780_class</a></div><div class="ttdeci">static struct class * hd44780_class</div><div class="ttdef"><b>Definition:</b> hd44780.c:46</div></div>
+<div class="ttc" id="hd44780_8c_html_aaeb9d01b89561b7086b450105ecd32fe"><div class="ttname"><a href="hd44780_8c.html#aaeb9d01b89561b7086b450105ecd32fe">exit_display</a></div><div class="ttdeci">static int exit_display(void)</div><div class="ttdoc">frees memory on every initialized gpio pin if module gets unloaded from kernel </div><div class="ttdef"><b>Definition:</b> hd44780.c:277</div></div>
+<div class="ttc" id="hd44780_8c_html_a628c122c638ae60b0c6d8a30c4e55b46"><div class="ttname"><a href="hd44780_8c.html#a628c122c638ae60b0c6d8a30c4e55b46">driver_object</a></div><div class="ttdeci">static struct cdev * driver_object</div><div class="ttdef"><b>Definition:</b> hd44780.c:45</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="a2b796de854877d3b6e8e9c73a8c60c00"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static int __init mod_init </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>kernel module initialization function </p>
+<p>the static keyword restricts the visibility of the function within this C file __init macro means that for a built-in driver (not a kernel module!) is only used at initialization time and that it can be discarded and its memory freed after. </p><dl class="section return"><dt>Returns</dt><dd>returns 0 if successful </dd></dl>
+<div class="fragment"><div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;                                {</div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;<span class="keywordtype">int</span> error = 0;  </div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;</div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;<a class="code" href="hd44780_8c.html#a8910285a0352a5c710e65ec9ecbe32a1">dev</a> = MKDEV(<a class="code" href="hd44780_8c.html#ac8947941479c38403a09c14a60b03f01">major</a>, <a class="code" href="hd44780_8c.html#aec7b96885baf2e6f10efbdef9d935a0b">minor</a>);</div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;</div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;<span class="keywordflow">if</span>(register_chrdev_region(MKDEV(<a class="code" href="hd44780_8c.html#ac8947941479c38403a09c14a60b03f01">major</a>, 0),<a class="code" href="hd44780_8c.html#ad43c3812e6d13e0518d9f8b8f463ffcf">count</a>,<span class="stringliteral">&quot;hd44780&quot;</span>) &lt; 0){</div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;    printk(<span class="stringliteral">&quot;devicenumber(255, 0) in use!\n&quot;</span>);</div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;    <span class="keywordflow">return</span> -EIO;</div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;}</div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;<span class="keywordflow">else</span>{</div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;    error = alloc_chrdev_region(&amp;<a class="code" href="hd44780_8c.html#a8910285a0352a5c710e65ec9ecbe32a1">dev</a>, 0, <a class="code" href="hd44780_8c.html#ad43c3812e6d13e0518d9f8b8f463ffcf">count</a>, <span class="stringliteral">&quot;hd44780&quot;</span>);</div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;    <a class="code" href="hd44780_8c.html#ac8947941479c38403a09c14a60b03f01">major</a> = MAJOR(<a class="code" href="hd44780_8c.html#a8910285a0352a5c710e65ec9ecbe32a1">dev</a>);</div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;}</div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;</div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;<a class="code" href="hd44780_8c.html#a628c122c638ae60b0c6d8a30c4e55b46">driver_object</a> = cdev_alloc();   <span class="comment">/* registered object reserved*/</span></div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;</div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;<span class="keywordflow">if</span>(<a class="code" href="hd44780_8c.html#a628c122c638ae60b0c6d8a30c4e55b46">driver_object</a> == NULL){</div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;    <span class="keywordflow">goto</span> free_device_number;</div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;}</div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;</div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;<a class="code" href="hd44780_8c.html#a628c122c638ae60b0c6d8a30c4e55b46">driver_object</a>-&gt;owner = THIS_MODULE;</div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;<a class="code" href="hd44780_8c.html#a628c122c638ae60b0c6d8a30c4e55b46">driver_object</a>-&gt;ops = &amp;<a class="code" href="hd44780_8c.html#a28ee7ed9613033920e733c9da671f79c">fops</a>;</div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;    </div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;<span class="keywordflow">if</span>(cdev_add(<a class="code" href="hd44780_8c.html#a628c122c638ae60b0c6d8a30c4e55b46">driver_object</a>, <a class="code" href="hd44780_8c.html#a8910285a0352a5c710e65ec9ecbe32a1">dev</a>, 1)){</div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;    <span class="keywordflow">goto</span> free_cdev;</div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;}</div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;</div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;<a class="code" href="hd44780_8c.html#a2924ecef65e0b40dc3dfab97f5a18b2f">hd44780_class</a> = class_create(THIS_MODULE, <span class="stringliteral">&quot;hd44780&quot;</span>);</div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;</div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;<span class="keywordflow">if</span>(IS_ERR(<a class="code" href="hd44780_8c.html#a2924ecef65e0b40dc3dfab97f5a18b2f">hd44780_class</a>)){</div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;    pr_err(<span class="stringliteral">&quot;hd44780: no udev support!\n&quot;</span>);</div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;    <span class="keywordflow">goto</span> free_cdev;</div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;}</div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;</div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;<a class="code" href="hd44780_8c.html#a7f39d148808b935cc26697ba64f38127">hd44780_dev</a> = device_create(<a class="code" href="hd44780_8c.html#a2924ecef65e0b40dc3dfab97f5a18b2f">hd44780_class</a>, NULL, <a class="code" href="hd44780_8c.html#a8910285a0352a5c710e65ec9ecbe32a1">dev</a>, NULL, <span class="stringliteral">&quot;%s&quot;</span>, <span class="stringliteral">&quot;hd44780&quot;</span>);</div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;dev_info(<a class="code" href="hd44780_8c.html#a7f39d148808b935cc26697ba64f38127">hd44780_dev</a>, <span class="stringliteral">&quot;mod_init called\n&quot;</span>);</div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;</div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;<span class="keywordflow">if</span>(<a class="code" href="hd44780_8c.html#a56a4067c846fe4fc7959a60d87b8b0f1">init_display</a>() == 0){</div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;}</div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;</div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;free_cdev:</div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;    kobject_put(&amp;<a class="code" href="hd44780_8c.html#a628c122c638ae60b0c6d8a30c4e55b46">driver_object</a>-&gt;kobj);</div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;free_device_number:</div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;    unregister_chrdev_region(<a class="code" href="hd44780_8c.html#a8910285a0352a5c710e65ec9ecbe32a1">dev</a>, 1);</div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;    printk(<span class="stringliteral">&quot;mod_init failed\n&quot;</span>);</div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;    <span class="keywordflow">return</span> -EIO;</div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;}</div>
+<div class="ttc" id="hd44780_8c_html_a56a4067c846fe4fc7959a60d87b8b0f1"><div class="ttname"><a href="hd44780_8c.html#a56a4067c846fe4fc7959a60d87b8b0f1">init_display</a></div><div class="ttdeci">static int __init init_display(void)</div><div class="ttdoc">initializes display as soon as the module is loaded into the kernel </div><div class="ttdef"><b>Definition:</b> hd44780.c:222</div></div>
+<div class="ttc" id="hd44780_8c_html_ad43c3812e6d13e0518d9f8b8f463ffcf"><div class="ttname"><a href="hd44780_8c.html#ad43c3812e6d13e0518d9f8b8f463ffcf">count</a></div><div class="ttdeci">static int count</div><div class="ttdef"><b>Definition:</b> hd44780.c:39</div></div>
+<div class="ttc" id="hd44780_8c_html_a8910285a0352a5c710e65ec9ecbe32a1"><div class="ttname"><a href="hd44780_8c.html#a8910285a0352a5c710e65ec9ecbe32a1">dev</a></div><div class="ttdeci">dev_t dev</div><div class="ttdoc">variable for lcd device </div><div class="ttdef"><b>Definition:</b> hd44780.c:41</div></div>
+<div class="ttc" id="hd44780_8c_html_a7f39d148808b935cc26697ba64f38127"><div class="ttname"><a href="hd44780_8c.html#a7f39d148808b935cc26697ba64f38127">hd44780_dev</a></div><div class="ttdeci">static struct device * hd44780_dev</div><div class="ttdef"><b>Definition:</b> hd44780.c:47</div></div>
+<div class="ttc" id="hd44780_8c_html_a2924ecef65e0b40dc3dfab97f5a18b2f"><div class="ttname"><a href="hd44780_8c.html#a2924ecef65e0b40dc3dfab97f5a18b2f">hd44780_class</a></div><div class="ttdeci">static struct class * hd44780_class</div><div class="ttdef"><b>Definition:</b> hd44780.c:46</div></div>
+<div class="ttc" id="hd44780_8c_html_aec7b96885baf2e6f10efbdef9d935a0b"><div class="ttname"><a href="hd44780_8c.html#aec7b96885baf2e6f10efbdef9d935a0b">minor</a></div><div class="ttdeci">static int minor</div><div class="ttdef"><b>Definition:</b> hd44780.c:38</div></div>
+<div class="ttc" id="hd44780_8c_html_a28ee7ed9613033920e733c9da671f79c"><div class="ttname"><a href="hd44780_8c.html#a28ee7ed9613033920e733c9da671f79c">fops</a></div><div class="ttdeci">static struct file_operations fops</div><div class="ttdoc">Devices are represented as file structures in the kernel. </div><div class="ttdef"><b>Definition:</b> hd44780.c:143</div></div>
+<div class="ttc" id="hd44780_8c_html_a628c122c638ae60b0c6d8a30c4e55b46"><div class="ttname"><a href="hd44780_8c.html#a628c122c638ae60b0c6d8a30c4e55b46">driver_object</a></div><div class="ttdeci">static struct cdev * driver_object</div><div class="ttdef"><b>Definition:</b> hd44780.c:45</div></div>
+<div class="ttc" id="hd44780_8c_html_ac8947941479c38403a09c14a60b03f01"><div class="ttname"><a href="hd44780_8c.html#ac8947941479c38403a09c14a60b03f01">major</a></div><div class="ttdeci">static int major</div><div class="ttdoc">major number as an lkm identifier </div><div class="ttdef"><b>Definition:</b> hd44780.c:37</div></div>
+</div><!-- fragment -->
+</div>
+</div>
 <a class="anchor" id="abf13a12292da7acc4b17217fe0f37417"></a>
 <div class="memitem">
 <div class="memproto">
@@ -194,7 +726,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">module_exit </td>
           <td>(</td>
-          <td class="paramtype">mod_exit&#160;</td>
+          <td class="paramtype"><a class="el" href="hd44780_8c.html#a39f7f81eb9dcc1767834f259f32979ba">mod_exit</a>&#160;</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
@@ -210,14 +742,15 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">module_init </td>
           <td>(</td>
-          <td class="paramtype">mod_init&#160;</td>
+          <td class="paramtype"><a class="el" href="hd44780_8c.html#a2b796de854877d3b6e8e9c73a8c60c00">mod_init</a>&#160;</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>a module must use the <a class="el" href="hd44780_8c.html#a63936a07c493d98700dad3cf37aa30de" title="a module must use the module_init() and module_exit() macros from linux/init.h which identify the ini...">module_init()</a> and <a class="el" href="hd44780_8c.html#a92f7251a3e21772c1063cb378ab99b3d">module_exit()</a> macros from linux/init.h which identify the initialization function at insertion time and the cleanup function (as listed above) </p>
+<p>a module must use the <a class="el" href="hd44780_8c.html#a63936a07c493d98700dad3cf37aa30de" title="a module must use the module_init() and module_exit() macros from linux/init.h ">module_init()</a> and <a class="el" href="hd44780_8c.html#a92f7251a3e21772c1063cb378ab99b3d">module_exit()</a> macros from linux/init.h </p>
+<p>which identify the initialization function at insertion time and the cleanup function (as listed above) </p>
 
 </div>
 </div>
@@ -244,7 +777,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">module_param </td>
           <td>(</td>
-          <td class="paramtype">major&#160;</td>
+          <td class="paramtype"><a class="el" href="hd44780_8c.html#ac8947941479c38403a09c14a60b03f01">major</a>&#160;</td>
           <td class="paramname">, </td>
         </tr>
         <tr>
@@ -266,7 +799,6 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
 <p>module parameters -&gt; allow arguments to be passed to modules </p>
 
 </div>
@@ -278,7 +810,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">module_param </td>
           <td>(</td>
-          <td class="paramtype">count&#160;</td>
+          <td class="paramtype"><a class="el" href="hd44780_8c.html#ad43c3812e6d13e0518d9f8b8f463ffcf">count</a>&#160;</td>
           <td class="paramname">, </td>
         </tr>
         <tr>
@@ -319,7 +851,133 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="ae0b6133b70bc190065133c49eb16f55f"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void write_lcd </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>regist</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>uses write_nibble to shift and reverse logic values </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">control</td><td>character </td></tr>
+    <tr><td class="paramname">value</td><td>to write </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="fragment"><div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;                                            {</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    <a class="code" href="hd44780_8c.html#a0eab6f129d21added23841a39571dea3">write_nibble</a>(regist, value &gt;&gt; 4); <span class="comment">//HIGH-Nibble logic</span></div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;    <a class="code" href="hd44780_8c.html#a0eab6f129d21added23841a39571dea3">write_nibble</a>(regist, value &amp; 0xf); <span class="comment">//LOW-Nibble logic</span></div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;}</div>
+<div class="ttc" id="hd44780_8c_html_a0eab6f129d21added23841a39571dea3"><div class="ttname"><a href="hd44780_8c.html#a0eab6f129d21added23841a39571dea3">write_nibble</a></div><div class="ttdeci">static void write_nibble(int regist, int value)</div><div class="ttdoc">writes 4-bit values to gpio </div><div class="ttdef"><b>Definition:</b> hd44780.c:161</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="a0eab6f129d21added23841a39571dea3"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void write_nibble </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>regist</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>writes 4-bit values to gpio </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">control</td><td>character </td></tr>
+    <tr><td class="paramname">value</td><td>to write </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="fragment"><div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;                                               {</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    gpio_set_value(7, regist);</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    </div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    gpio_set_value(25, value &amp; 0x1); <span class="comment">//DATABIT 4</span></div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;    gpio_set_value(24, value &amp; 0x2); <span class="comment">//DATABIT 5</span></div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    gpio_set_value(23, value &amp; 0x4); <span class="comment">//DATABIT 6</span></div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;    gpio_set_value(18, value &amp; 0x8); <span class="comment">//DATABIT 7</span></div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;    gpio_set_value(8, 1); <span class="comment">//enabled to write values</span></div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    </div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    udelay(40);</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;    gpio_set_value(8, 0); <span class="comment">//disabled to write values</span></div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;}</div>
+</div><!-- fragment -->
+</div>
+</div>
 <h2 class="groupheader">Variable Documentation</h2>
+<a class="anchor" id="ad43c3812e6d13e0518d9f8b8f463ffcf"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int count = 1</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a8910285a0352a5c710e65ec9ecbe32a1"></a>
 <div class="memitem">
 <div class="memproto">
@@ -334,10 +992,186 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="afd20d9c5f02b616c3c3cb41892e3f5d3"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int dev_cnt = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>used to prevent multiple access </p>
+
+</div>
+</div>
+<a class="anchor" id="a628c122c638ae60b0c6d8a30c4e55b46"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct cdev* driver_object</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a28ee7ed9613033920e733c9da671f79c"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct file_operations fops</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">    .owner = THIS_MODULE,</div>
+<div class="line">    .open = <a class="code" href="hd44780_8c.html#aa1ec1faa20fcdd72008800756f5f5134">dev_open</a>,</div>
+<div class="line">    .write = <a class="code" href="hd44780_8c.html#a23ebf6135f28b8d3c3e693971b9e2333">dev_write</a>,</div>
+<div class="line">    .release = <a class="code" href="hd44780_8c.html#a6b207bce4fc5e05120e630d1c4bb6377">dev_release</a>      </div>
+<div class="line">}</div>
+<div class="ttc" id="hd44780_8c_html_aa1ec1faa20fcdd72008800756f5f5134"><div class="ttname"><a href="hd44780_8c.html#aa1ec1faa20fcdd72008800756f5f5134">dev_open</a></div><div class="ttdeci">static int dev_open(struct inode *inode, struct file *fp)</div><div class="ttdoc">executed from user via userspace interface program and increment device counter </div><div class="ttdef"><b>Definition:</b> hd44780.c:295</div></div>
+<div class="ttc" id="hd44780_8c_html_a23ebf6135f28b8d3c3e693971b9e2333"><div class="ttname"><a href="hd44780_8c.html#a23ebf6135f28b8d3c3e693971b9e2333">dev_write</a></div><div class="ttdeci">static ssize_t dev_write(struct file *instance, const char __user *user, size_t cnt, loff_t *offset)</div><div class="ttdoc">function is called when device is being written from user space </div><div class="ttdef"><b>Definition:</b> hd44780.c:328</div></div>
+<div class="ttc" id="hd44780_8c_html_a6b207bce4fc5e05120e630d1c4bb6377"><div class="ttname"><a href="hd44780_8c.html#a6b207bce4fc5e05120e630d1c4bb6377">dev_release</a></div><div class="ttdeci">static int dev_release(struct inode *inode, struct file *fp)</div><div class="ttdoc">executed from user via userspace interface program and decrement device counter </div><div class="ttdef"><b>Definition:</b> hd44780.c:310</div></div>
+</div><!-- fragment -->
+<p>Devices are represented as file structures in the kernel. </p>
+<p>file_operation struct from /linux/fs.h lists the various callback functions which can be associated with file operations </p>
+
+</div>
+</div>
+<a class="anchor" id="a2924ecef65e0b40dc3dfab97f5a18b2f"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct class* hd44780_class</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a7f39d148808b935cc26697ba64f38127"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct device* hd44780_dev</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ac8947941479c38403a09c14a60b03f01"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int major = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>major number as an lkm identifier </p>
+
+</div>
+</div>
+<a class="anchor" id="aec7b96885baf2e6f10efbdef9d935a0b"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int minor = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a21566485093f5feef65ee0fc7a32a91e"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">char textbuffer[1024]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jun 2 2016 15:31:29 for LKM hd44780 lcd by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Jun 2 2016 16:23:02 for LKM hd44780 lcd by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

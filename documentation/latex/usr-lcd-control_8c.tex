@@ -14,8 +14,7 @@ a linux user space program that communicates with the hd44780 linux kernel modul
 {\ttfamily \#include $<$string.\+h$>$}\\*
 {\ttfamily \#include $<$ctype.\+h$>$}\\*
 {\ttfamily \#include \char`\"{}ioctl\+\_\+header.\+h\char`\"{}}\\*
-Include dependency graph for usr-\/lcd-\/control.c\+:
-\nopagebreak
+Include dependency graph for usr-\/lcd-\/control.c\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -52,3 +51,39 @@ Daniel Obermaier
 \item[{char $\ast$$\ast$}]{argv}
 \end{DoxyParamCaption}
 )}}\label{usr-lcd-control_8c_a3c04138a5bfe5d72780bb7e82a18e627}
+
+\begin{DoxyCode}
+22                                \{
+23 
+24 \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{char}* devname = \textcolor{stringliteral}{"/dev/hd44780"};
+25 
+26 \textcolor{keywordtype}{int} ret = 0;
+27 \textcolor{keywordtype}{char} buff[128] = \textcolor{stringliteral}{""};
+28 \textcolor{keywordtype}{int} \hyperlink{hd44780_8c_a8910285a0352a5c710e65ec9ecbe32a1}{dev} = 0;
+29 
+30 \textcolor{keywordflow}{if}(argc != 2)\{ \textcolor{comment}{/*argc should be 2 for correct execution*/}
+31     printf(\textcolor{stringliteral}{"usage:  <filename> <string>\(\backslash\)n"});
+32 \}
+33 \textcolor{keywordflow}{else}\{
+34     \textcolor{comment}{//assume argv[1] is the string to write }
+35     \textcolor{keywordtype}{int} dev = open(devname, O\_WRONLY);  \textcolor{comment}{//open device file -> WRITE ONLY}
+36     
+37     ret = write(dev, \textcolor{stringliteral}{"                                "}, 32);   \textcolor{comment}{//clear display}
+38     \textcolor{keywordflow}{if}(dev == -1)\{
+39         perror(\textcolor{stringliteral}{"can't open device file\(\backslash\)n"});
+40         \textcolor{keywordflow}{return} -EIO;
+41     \}
+42 
+43     ret = write(dev, argv[1], 128); \textcolor{comment}{//write string to device}
+44 
+45     \textcolor{keywordflow}{if}(ret < 0)\{
+46         perror(\textcolor{stringliteral}{"cant write to devicefile\(\backslash\)n"});
+47         \textcolor{keywordflow}{return} EIO;
+48     \}
+49 \}
+50 
+51 close(dev);     \textcolor{comment}{//close device afterwards}
+52 
+53 \textcolor{keywordflow}{return} 0;
+54 \}
+\end{DoxyCode}
