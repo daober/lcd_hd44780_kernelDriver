@@ -71,7 +71,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -85,18 +85,18 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">/home/pi/SysProg/lcd-driver/ioctl_header.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div>
+<a href="ioctl__header_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;linux/ioctl.h&gt;</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#define MAGIC_NUM &#39;k&#39;   </span><span class="comment">/*unique arbitrary number for driver*/</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="ioctl__header_8h.html#a23f15b5855019d8ac0c75f82484f8047">    9</a></span>&#160;<span class="preprocessor">#define MAGIC_NUM &#39;k&#39;   </span><span class="comment">/*unique arbitrary number for driver*/</span><span class="preprocessor"></span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#define IOCTL       _IO(MAGIC_NUM, 0);      </span><span class="comment">/*int argument*/</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#define IOCTL_WRITE _IOW(MAGIC_NUM, 2, int)     </span><span class="comment">/*returns sizeof(int) bytes to the user */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#define IOCTL_READ  _IOR(MAGIC_NUM, 3, int)     </span><span class="comment">/*...*/</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="ioctl__header_8h.html#a85699dc8e51a8445392801b9e1994758">   11</a></span>&#160;<span class="preprocessor">#define IOCTL       _IO(MAGIC_NUM, 0);      </span><span class="comment">/*int argument*/</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="ioctl__header_8h.html#a7397849fd9ac3e2bc321921033aae806">   12</a></span>&#160;<span class="preprocessor">#define IOCTL_WRITE _IOW(MAGIC_NUM, 2, int)     </span><span class="comment">/*returns sizeof(int) bytes to the user */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="ioctl__header_8h.html#a8cbb4cc1fd96df34b3e16eb1ea744455">   13</a></span>&#160;<span class="preprocessor">#define IOCTL_READ  _IOR(MAGIC_NUM, 3, int)     </span><span class="comment">/*...*/</span><span class="preprocessor"></span></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jun 2 2016 15:23:01 for LKM hd44780 lcd by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Jun 2 2016 15:31:29 for LKM hd44780 lcd by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

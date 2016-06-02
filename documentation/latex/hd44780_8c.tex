@@ -24,7 +24,8 @@ loadable kernel module character device driver for support a simple 2x16 lcd dis
 {\ttfamily \#include $<$linux/ktime.\+h$>$}\\*
 {\ttfamily \#include $<$linux/interrupt.\+h$>$}\\*
 {\ttfamily \#include \char`\"{}ioctl\+\_\+header.\+h\char`\"{}}\\*
-Include dependency graph for hd44780.\+c\+:\nopagebreak
+Include dependency graph for hd44780.\+c\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -36,32 +37,24 @@ Include dependency graph for hd44780.\+c\+:\nopagebreak
 \item 
 \hyperlink{hd44780_8c_abf13a12292da7acc4b17217fe0f37417}{M\+O\+D\+U\+L\+E\+\_\+\+A\+U\+T\+H\+O\+R} (\char`\"{}Daniel Obermaier $<$mailto\+:dan.\+obermaier@gmail.\+com$>$\char`\"{})
 \begin{DoxyCompactList}\small\item\em $<$ core header for loading L\+K\+Ms into the kernel \end{DoxyCompactList}\item 
-\hypertarget{hd44780_8c_a3b308580fb76459a08a77c2394250426}{{\bfseries M\+O\+D\+U\+L\+E\+\_\+\+D\+E\+S\+C\+R\+I\+P\+T\+I\+O\+N} (\char`\"{}driver for L\+C\+D Display with H\+D44780 controller\char`\"{})}\label{hd44780_8c_a3b308580fb76459a08a77c2394250426}
-
+\hyperlink{hd44780_8c_a3b308580fb76459a08a77c2394250426}{M\+O\+D\+U\+L\+E\+\_\+\+D\+E\+S\+C\+R\+I\+P\+T\+I\+O\+N} (\char`\"{}driver for L\+C\+D Display with H\+D44780 controller\char`\"{})
 \item 
-\hypertarget{hd44780_8c_ad94b36675e7eb067ea3ce6ff9e244a44}{{\bfseries M\+O\+D\+U\+L\+E\+\_\+\+L\+I\+C\+E\+N\+S\+E} (\char`\"{}G\+P\+L\char`\"{})}\label{hd44780_8c_ad94b36675e7eb067ea3ce6ff9e244a44}
-
+\hyperlink{hd44780_8c_ad94b36675e7eb067ea3ce6ff9e244a44}{M\+O\+D\+U\+L\+E\+\_\+\+L\+I\+C\+E\+N\+S\+E} (\char`\"{}G\+P\+L\char`\"{})
 \item 
-\hypertarget{hd44780_8c_a4b75c2cb371865e62f06fc635df9401e}{{\bfseries M\+O\+D\+U\+L\+E\+\_\+\+V\+E\+R\+S\+I\+O\+N} (\char`\"{}0.\+1\char`\"{})}\label{hd44780_8c_a4b75c2cb371865e62f06fc635df9401e}
-
+\hyperlink{hd44780_8c_a4b75c2cb371865e62f06fc635df9401e}{M\+O\+D\+U\+L\+E\+\_\+\+V\+E\+R\+S\+I\+O\+N} (\char`\"{}0.\+1\char`\"{})
 \item 
-\hypertarget{hd44780_8c_a1dc5174a07767c41761c513b9ba16422}{\hyperlink{hd44780_8c_a1dc5174a07767c41761c513b9ba16422}{module\+\_\+param} (major, int, S\+\_\+\+I\+R\+U\+G\+O$\vert$S\+\_\+\+I\+W\+U\+S\+R)}\label{hd44780_8c_a1dc5174a07767c41761c513b9ba16422}
-
+\hyperlink{hd44780_8c_a1dc5174a07767c41761c513b9ba16422}{module\+\_\+param} (major, int, S\+\_\+\+I\+R\+U\+G\+O$\vert$S\+\_\+\+I\+W\+U\+S\+R)
 \begin{DoxyCompactList}\small\item\em module parameters -\/$>$ allow arguments to be passed to modules \end{DoxyCompactList}\item 
-\hypertarget{hd44780_8c_aa3d8ce5316766e98caada6c877ded662}{{\bfseries module\+\_\+param} (count, int, S\+\_\+\+I\+R\+U\+G\+O$\vert$S\+\_\+\+I\+W\+U\+S\+R)}\label{hd44780_8c_aa3d8ce5316766e98caada6c877ded662}
-
+\hyperlink{hd44780_8c_aa3d8ce5316766e98caada6c877ded662}{module\+\_\+param} (count, int, S\+\_\+\+I\+R\+U\+G\+O$\vert$S\+\_\+\+I\+W\+U\+S\+R)
 \item 
-\hypertarget{hd44780_8c_a63936a07c493d98700dad3cf37aa30de}{\hyperlink{hd44780_8c_a63936a07c493d98700dad3cf37aa30de}{module\+\_\+init} (mod\+\_\+init)}\label{hd44780_8c_a63936a07c493d98700dad3cf37aa30de}
-
-\begin{DoxyCompactList}\small\item\em a module must use the \hyperlink{hd44780_8c_a63936a07c493d98700dad3cf37aa30de}{module\+\_\+init()} and module\+\_\+exit() macros from linux/init.\+h which identify the initialization function at insertion time and the cleanup function (as listed above) \end{DoxyCompactList}\item 
-\hypertarget{hd44780_8c_a92f7251a3e21772c1063cb378ab99b3d}{{\bfseries module\+\_\+exit} (mod\+\_\+exit)}\label{hd44780_8c_a92f7251a3e21772c1063cb378ab99b3d}
-
+\hyperlink{hd44780_8c_a63936a07c493d98700dad3cf37aa30de}{module\+\_\+init} (mod\+\_\+init)
+\begin{DoxyCompactList}\small\item\em a module must use the \hyperlink{hd44780_8c_a63936a07c493d98700dad3cf37aa30de}{module\+\_\+init()} and \hyperlink{hd44780_8c_a92f7251a3e21772c1063cb378ab99b3d}{module\+\_\+exit()} macros from linux/init.\+h which identify the initialization function at insertion time and the cleanup function (as listed above) \end{DoxyCompactList}\item 
+\hyperlink{hd44780_8c_a92f7251a3e21772c1063cb378ab99b3d}{module\+\_\+exit} (mod\+\_\+exit)
 \end{DoxyCompactItemize}
 \subsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{hd44780_8c_a8910285a0352a5c710e65ec9ecbe32a1}{dev\+\_\+t \hyperlink{hd44780_8c_a8910285a0352a5c710e65ec9ecbe32a1}{dev} = 0}\label{hd44780_8c_a8910285a0352a5c710e65ec9ecbe32a1}
-
+dev\+\_\+t \hyperlink{hd44780_8c_a8910285a0352a5c710e65ec9ecbe32a1}{dev} = 0
 \begin{DoxyCompactList}\small\item\em variable for lcd device \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -94,4 +87,74 @@ Daniel Obermaier, Victor Nagy, Markus Fischer
 
 $<$ core header for loading L\+K\+Ms into the kernel 
 
-$<$ for prink priority macros $<$ for entry/exit macros to mark up functions e.\+g. \+\_\+\+\_\+init \+\_\+\+\_\+exit header for the linux file system support $<$ header to support the kernel module driver $<$ required for copy\+\_\+to\+\_\+user() function 
+$<$ for prink priority macros $<$ for entry/exit macros to mark up functions e.\+g. \+\_\+\+\_\+init \+\_\+\+\_\+exit header for the linux file system support $<$ header to support the kernel module driver $<$ required for copy\+\_\+to\+\_\+user() function \hypertarget{hd44780_8c_a3b308580fb76459a08a77c2394250426}{\index{hd44780.\+c@{hd44780.\+c}!M\+O\+D\+U\+L\+E\+\_\+\+D\+E\+S\+C\+R\+I\+P\+T\+I\+O\+N@{M\+O\+D\+U\+L\+E\+\_\+\+D\+E\+S\+C\+R\+I\+P\+T\+I\+O\+N}}
+\index{M\+O\+D\+U\+L\+E\+\_\+\+D\+E\+S\+C\+R\+I\+P\+T\+I\+O\+N@{M\+O\+D\+U\+L\+E\+\_\+\+D\+E\+S\+C\+R\+I\+P\+T\+I\+O\+N}!hd44780.\+c@{hd44780.\+c}}
+\subsubsection[{M\+O\+D\+U\+L\+E\+\_\+\+D\+E\+S\+C\+R\+I\+P\+T\+I\+O\+N}]{\setlength{\rightskip}{0pt plus 5cm}M\+O\+D\+U\+L\+E\+\_\+\+D\+E\+S\+C\+R\+I\+P\+T\+I\+O\+N (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}driver for L\+C\+D Display with H\+D44780 controller\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}}\label{hd44780_8c_a3b308580fb76459a08a77c2394250426}
+\hypertarget{hd44780_8c_a92f7251a3e21772c1063cb378ab99b3d}{\index{hd44780.\+c@{hd44780.\+c}!module\+\_\+exit@{module\+\_\+exit}}
+\index{module\+\_\+exit@{module\+\_\+exit}!hd44780.\+c@{hd44780.\+c}}
+\subsubsection[{module\+\_\+exit}]{\setlength{\rightskip}{0pt plus 5cm}module\+\_\+exit (
+\begin{DoxyParamCaption}
+\item[{mod\+\_\+exit}]{}
+\end{DoxyParamCaption}
+)}}\label{hd44780_8c_a92f7251a3e21772c1063cb378ab99b3d}
+\hypertarget{hd44780_8c_a63936a07c493d98700dad3cf37aa30de}{\index{hd44780.\+c@{hd44780.\+c}!module\+\_\+init@{module\+\_\+init}}
+\index{module\+\_\+init@{module\+\_\+init}!hd44780.\+c@{hd44780.\+c}}
+\subsubsection[{module\+\_\+init}]{\setlength{\rightskip}{0pt plus 5cm}module\+\_\+init (
+\begin{DoxyParamCaption}
+\item[{mod\+\_\+init}]{}
+\end{DoxyParamCaption}
+)}}\label{hd44780_8c_a63936a07c493d98700dad3cf37aa30de}
+
+
+a module must use the \hyperlink{hd44780_8c_a63936a07c493d98700dad3cf37aa30de}{module\+\_\+init()} and \hyperlink{hd44780_8c_a92f7251a3e21772c1063cb378ab99b3d}{module\+\_\+exit()} macros from linux/init.\+h which identify the initialization function at insertion time and the cleanup function (as listed above) 
+
+\hypertarget{hd44780_8c_ad94b36675e7eb067ea3ce6ff9e244a44}{\index{hd44780.\+c@{hd44780.\+c}!M\+O\+D\+U\+L\+E\+\_\+\+L\+I\+C\+E\+N\+S\+E@{M\+O\+D\+U\+L\+E\+\_\+\+L\+I\+C\+E\+N\+S\+E}}
+\index{M\+O\+D\+U\+L\+E\+\_\+\+L\+I\+C\+E\+N\+S\+E@{M\+O\+D\+U\+L\+E\+\_\+\+L\+I\+C\+E\+N\+S\+E}!hd44780.\+c@{hd44780.\+c}}
+\subsubsection[{M\+O\+D\+U\+L\+E\+\_\+\+L\+I\+C\+E\+N\+S\+E}]{\setlength{\rightskip}{0pt plus 5cm}M\+O\+D\+U\+L\+E\+\_\+\+L\+I\+C\+E\+N\+S\+E (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}G\+P\+L\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}}\label{hd44780_8c_ad94b36675e7eb067ea3ce6ff9e244a44}
+\hypertarget{hd44780_8c_a1dc5174a07767c41761c513b9ba16422}{\index{hd44780.\+c@{hd44780.\+c}!module\+\_\+param@{module\+\_\+param}}
+\index{module\+\_\+param@{module\+\_\+param}!hd44780.\+c@{hd44780.\+c}}
+\subsubsection[{module\+\_\+param}]{\setlength{\rightskip}{0pt plus 5cm}module\+\_\+param (
+\begin{DoxyParamCaption}
+\item[{major}]{, }
+\item[{int}]{, }
+\item[{S\+\_\+\+I\+R\+U\+G\+O$\vert$}]{S\+\_\+\+I\+W\+U\+S\+R}
+\end{DoxyParamCaption}
+)}}\label{hd44780_8c_a1dc5174a07767c41761c513b9ba16422}
+
+
+module parameters -\/$>$ allow arguments to be passed to modules 
+
+\hypertarget{hd44780_8c_aa3d8ce5316766e98caada6c877ded662}{\index{hd44780.\+c@{hd44780.\+c}!module\+\_\+param@{module\+\_\+param}}
+\index{module\+\_\+param@{module\+\_\+param}!hd44780.\+c@{hd44780.\+c}}
+\subsubsection[{module\+\_\+param}]{\setlength{\rightskip}{0pt plus 5cm}module\+\_\+param (
+\begin{DoxyParamCaption}
+\item[{count}]{, }
+\item[{int}]{, }
+\item[{S\+\_\+\+I\+R\+U\+G\+O$\vert$}]{S\+\_\+\+I\+W\+U\+S\+R}
+\end{DoxyParamCaption}
+)}}\label{hd44780_8c_aa3d8ce5316766e98caada6c877ded662}
+\hypertarget{hd44780_8c_a4b75c2cb371865e62f06fc635df9401e}{\index{hd44780.\+c@{hd44780.\+c}!M\+O\+D\+U\+L\+E\+\_\+\+V\+E\+R\+S\+I\+O\+N@{M\+O\+D\+U\+L\+E\+\_\+\+V\+E\+R\+S\+I\+O\+N}}
+\index{M\+O\+D\+U\+L\+E\+\_\+\+V\+E\+R\+S\+I\+O\+N@{M\+O\+D\+U\+L\+E\+\_\+\+V\+E\+R\+S\+I\+O\+N}!hd44780.\+c@{hd44780.\+c}}
+\subsubsection[{M\+O\+D\+U\+L\+E\+\_\+\+V\+E\+R\+S\+I\+O\+N}]{\setlength{\rightskip}{0pt plus 5cm}M\+O\+D\+U\+L\+E\+\_\+\+V\+E\+R\+S\+I\+O\+N (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}0.\+1\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}}\label{hd44780_8c_a4b75c2cb371865e62f06fc635df9401e}
+
+
+\subsection{Variable Documentation}
+\hypertarget{hd44780_8c_a8910285a0352a5c710e65ec9ecbe32a1}{\index{hd44780.\+c@{hd44780.\+c}!dev@{dev}}
+\index{dev@{dev}!hd44780.\+c@{hd44780.\+c}}
+\subsubsection[{dev}]{\setlength{\rightskip}{0pt plus 5cm}dev\+\_\+t dev = 0}}\label{hd44780_8c_a8910285a0352a5c710e65ec9ecbe32a1}
+
+
+variable for lcd device 
+

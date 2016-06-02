@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['usr_2dlcd_2dcontrol_2ec',['usr-lcd-control.c',['../usr-lcd-control_8c.html',1,'']]]
+  ['lcd_2dkernel_2ddriver',['lcd-kernel-driver',['../md__home_pi_SysProg_lcd-driver_README.html',1,'']]]
 ];
