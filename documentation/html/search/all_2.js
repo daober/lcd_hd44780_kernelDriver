@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['module_5finit',['module_init',['../hd44780_8c.html#a63936a07c493d98700dad3cf37aa30de',1,'hd44780.c']]]
+  ['lcd_2dkernel_2ddriver',['lcd-kernel-driver',['../md__home_pi_SysProg_lcd-driver_README.html',1,'']]]
 ];

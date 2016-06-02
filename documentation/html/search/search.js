@@ -7,10 +7,11 @@
 
 var indexSectionsWithContent =
 {
-  0: "hlmu",
+  0: "dhlmu",
   1: "hu",
   2: "m",
-  3: "l"
+  3: "d",
+  4: "l"
 };
 
 var indexSectionNames =
@@ -18,7 +19,8 @@ var indexSectionNames =
   0: "all",
   1: "files",
   2: "functions",
-  3: "pages"
+  3: "variables",
+  4: "pages"
 };
 
 function convertToId(search)

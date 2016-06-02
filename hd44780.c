@@ -8,19 +8,19 @@
  * @see https://www.sparkfun.com/datasheets/LCD/HD44780.pdf datasheet for this hd44780 controller  	  
  */
 
-#include <linux/module.h>	//core header for loading LKMs into the kernel
+#include <linux/module.h>	///< core header for loading LKMs into the kernel
 #include <linux/moduleparam.h>
-#include <linux/kernel.h>	//for prink priority macros
-#include <linux/init.h>		//for entry/exit macros to mark up functions e.g. __init __exit
-#include <linux/fs.h>		//header for the linux file system support
+#include <linux/kernel.h>	///< for prink priority macros
+#include <linux/init.h>		///< for entry/exit macros to mark up functions e.g. __init __exit
+#include <linux/fs.h>		///< header for the linux file system support
 #include <linux/cdev.h>
 #include <linux/types.h>
-#include <linux/device.h>	//header to support the kernel module driver
+#include <linux/device.h>	///< header to support the kernel module driver
 #include <linux/cdev.h>
 #include <linux/gpio.h>
 #include <linux/delay.h>
 #include <linux/ctype.h>
-#include <asm/uaccess.h>	//required for copy_to_user() function
+#include <asm/uaccess.h>	///< required for copy_to_user() function
 #include <asm/errno.h>
 #include <linux/wait.h>
 #include <linux/hrtimer.h>
@@ -34,13 +34,13 @@ MODULE_DESCRIPTION("driver for LCD Display with HD44780 controller");		// descri
 MODULE_LICENSE("GPL");														// license type -> affects available functionality
 MODULE_VERSION("0.1");														// version number
 
-static int major = 0;
-static int minor = 0;
+static int major = 0;				///< major number as an lkm identifier
+static int minor = 0;			
 static int count = 1;
 
-dev_t dev = 0;
+dev_t dev = 0;					///< variable for lcd device
 
-static int dev_cnt = 0; //is device open? used to prevent multiple access
+static int dev_cnt = 0; 			///< used to prevent multiple access
 
 static struct cdev *driver_object;
 static struct class *hd44780_class;
@@ -75,10 +75,16 @@ static struct file_operations fops = {
 	.release = dev_release		/* a.k.a close */
 };
 
-//module parameters -> allow arguments to be passed to modules
+/** module parameters -> allow arguments to be passed to modules */
 module_param(major, int, S_IRUGO | S_IWUSR);
 module_param(count, int, S_IRUGO | S_IWUSR);
 
+
+/**
+* @brief writes 4-bit values to gpio
+* @param control character
+* @param value to write
+*/
 static void write_nibble(int regist, int value){
 
 	gpio_set_value(7, regist);
@@ -95,35 +101,49 @@ static void write_nibble(int regist, int value){
 	gpio_set_value(8, 0); //disabled to write values
 }
 
-
+/**
+* @brief uses write_nibble to shift and reverse logic values
+* @param control character
+* @param value to write
+*/
 static void write_lcd(int regist, int value){
 	write_nibble(regist, value >> 4); //HIGH-Nibble logic
 	write_nibble(regist, value & 0xf); //LOW-Nibble logic
 }
 
-
+/**
+* @brief checks if gpio can be written successfully
+* @param pin number of gpio to be requested 
+* @return request successful or not as integer
+*/
 static int gpio_request_output(int nr){
 	
 	char gpio_name[12];
-	int err;
+	int err = 0;
 
 	snprintf( gpio_name, sizeof(gpio_name), "rpi-gpio-%d", nr);
 	err = gpio_request(nr, gpio_name);
 
 	if(err){
 		printk("gpio request for %s failed with %d\n", gpio_name, err);
-		return -1;
+		return err;
 	}
 	err = gpio_direction_output(nr, 0);
 	if(err){
 		printk("gpio direction output failed %d\n", err);
 		gpio_free(nr);
-		return -1;
+		return err;
 	}
-	return 0;
+	return err;
 }
 
-
+/**
+* @brief initializes display as soon as the module is loaded into the kernel 
+* @return returns 0 if initializing is successful, otherwise <0
+* 
+* checks if every gpio can be requested successfully and write control bits to the lcd.
+* using sleep and delays to be sure writing is working problerly
+*/
 static int init_display(void){
 
 printk("initialize display\n");
@@ -174,6 +194,10 @@ free7: gpio_free(7);
 }
 
 
+/**
+* @brief frees memory on every initialized gpio pin if module gets unloaded from kernel
+* called from kernel callbacks
+*/
 static int exit_display(void){
 	printk("exit display called\n");
 	gpio_free(25);
@@ -185,7 +209,12 @@ static int exit_display(void){
 	return 0;
 }
 
-
+/**
+ * @brief executed from user via userspace interface program and increment device counter
+ * will be called if device will be opened
+ * @param inode to device file
+ * @param pointer to device file
+ */
 static int dev_open(struct inode* inode, struct file *fp){
 	printk(KERN_INFO "hd44780: device opened from user\n");
 
@@ -194,7 +223,12 @@ static int dev_open(struct inode* inode, struct file *fp){
 	return 0;	
 }
 
-
+/**
+ * @brief executed from user via userspace interface program and decrement device counter
+ * will be called on closing the device
+ * @param inode to device file
+ * @param pointer to device file
+*/
 static int dev_release(struct inode* inode, struct file *fp){
 	printk(KERN_INFO "hd44780: device closed from user\n");
 
@@ -205,10 +239,11 @@ static int dev_release(struct inode* inode, struct file *fp){
 
 
 /** @brief function is called when device is being written from user space
- * @param: pointer to a file instance
- * @param: buffer contains the string to write onto the device
- * @param: size of array that is being passed in the const char buffer
- * @param: offset if required
+ * @param pointer to a file instance
+ * @param buffer contains the string to write onto the device
+ * @param size of array that is being passed in the const char buffer
+ * @param offset if required
+ * @return number of characters left
  */
 static ssize_t dev_write(struct file *instance, const char __user *user, size_t cnt, loff_t *offset){
 

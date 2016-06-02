@@ -70,7 +70,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -119,8 +119,8 @@ Include dependency graph for hd44780.c:</div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:abf13a12292da7acc4b17217fe0f37417"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abf13a12292da7acc4b17217fe0f37417"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>MODULE_AUTHOR</b> (&quot;Daniel Obermaier &lt;mailto:dan.obermaier@gmail.com&gt;&quot;)</td></tr>
+<tr class="memitem:abf13a12292da7acc4b17217fe0f37417"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hd44780_8c.html#abf13a12292da7acc4b17217fe0f37417">MODULE_AUTHOR</a> (&quot;Daniel Obermaier &lt;mailto:dan.obermaier@gmail.com&gt;&quot;)</td></tr>
+<tr class="memdesc:abf13a12292da7acc4b17217fe0f37417"><td class="mdescLeft">&#160;</td><td class="mdescRight">&lt; core header for loading LKMs into the kernel  <a href="#abf13a12292da7acc4b17217fe0f37417">More...</a><br /></td></tr>
 <tr class="separator:abf13a12292da7acc4b17217fe0f37417"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3b308580fb76459a08a77c2394250426"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3b308580fb76459a08a77c2394250426"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>MODULE_DESCRIPTION</b> (&quot;driver for LCD Display with HD44780 controller&quot;)</td></tr>
@@ -131,8 +131,7 @@ Functions</h2></td></tr>
 <tr class="memitem:a4b75c2cb371865e62f06fc635df9401e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4b75c2cb371865e62f06fc635df9401e"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>MODULE_VERSION</b> (&quot;0.1&quot;)</td></tr>
 <tr class="separator:a4b75c2cb371865e62f06fc635df9401e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1dc5174a07767c41761c513b9ba16422"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1dc5174a07767c41761c513b9ba16422"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>module_param</b> (major, int, S_IRUGO|S_IWUSR)</td></tr>
+<tr class="memitem:a1dc5174a07767c41761c513b9ba16422"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hd44780_8c.html#a1dc5174a07767c41761c513b9ba16422">module_param</a> (major, int, S_IRUGO|S_IWUSR)</td></tr>
 <tr class="separator:a1dc5174a07767c41761c513b9ba16422"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa3d8ce5316766e98caada6c877ded662"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa3d8ce5316766e98caada6c877ded662"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>module_param</b> (count, int, S_IRUGO|S_IWUSR)</td></tr>
@@ -148,7 +147,8 @@ Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:a8910285a0352a5c710e65ec9ecbe32a1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8910285a0352a5c710e65ec9ecbe32a1"></a>
-dev_t&#160;</td><td class="memItemRight" valign="bottom"><b>dev</b> = 0</td></tr>
+dev_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hd44780_8c.html#a8910285a0352a5c710e65ec9ecbe32a1">dev</a> = 0</td></tr>
+<tr class="memdesc:a8910285a0352a5c710e65ec9ecbe32a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">variable for lcd device <br /></td></tr>
 <tr class="separator:a8910285a0352a5c710e65ec9ecbe32a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -157,10 +157,63 @@ dev_t&#160;</td><td class="memItemRight" valign="bottom"><b>dev</b> = 0</td></tr
 <dl class="section date"><dt>Date</dt><dd>01. June 2016 </dd></dl>
 <dl class="section version"><dt>Version</dt><dd>0.1 </dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a href="https://www.sparkfun.com/datasheets/LCD/HD44780.pdf">https://www.sparkfun.com/datasheets/LCD/HD44780.pdf</a> datasheet for this hd44780 controller </dd></dl>
-</div></div><!-- contents -->
+</div><h2 class="groupheader">Function Documentation</h2>
+<a class="anchor" id="abf13a12292da7acc4b17217fe0f37417"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">MODULE_AUTHOR </td>
+          <td>(</td>
+          <td class="paramtype">&quot;Daniel Obermaier &lt;mailto:dan.obermaier@gmail.com&gt;&quot;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>&lt; core header for loading LKMs into the kernel </p>
+<p>&lt; for prink priority macros &lt; for entry/exit macros to mark up functions e.g. __init __exit header for the linux file system support &lt; header to support the kernel module driver &lt; required for copy_to_user() function </p>
+
+</div>
+</div>
+<a class="anchor" id="a1dc5174a07767c41761c513b9ba16422"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">module_param </td>
+          <td>(</td>
+          <td class="paramtype">major&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">S_IRUGO|&#160;</td>
+          <td class="paramname"><em>S_IWUSR</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>module parameters -&gt; allow arguments to be passed to modules </p>
+
+</div>
+</div>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jun 2 2016 13:06:47 for LKM hd44780 lcd by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Jun 2 2016 15:07:31 for LKM hd44780 lcd by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>
