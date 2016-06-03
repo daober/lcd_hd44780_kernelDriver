@@ -19,22 +19,18 @@
 #include "ioctl_header.h"
 
 
-int main(int argc, char **argv){
+int main(void){
 
-static const char* devname = "/dev/hd44780";
+/*static const char* devname = "/dev/hd44780";
 
 int ret = 0;
 char buff[128] = "";
-int dev = 0;
-
-if(argc != 2){ /*argc should be 2 for correct execution*/
-	printf("usage:  <filename> <string>\n");
-}
-else{	
-	int dev = open(devname, O_WRONLY);	//open device file -> WRITE ONLY
+int dev = 0;*/
 	
-	ret = write(dev, "                                ", 32);	//clear display
-	if(dev == -1){
+//	int dev = open(devname, O_WRONLY);	//open device file -> WRITE ONLY
+	
+//	ret = write(dev, "                                ", 32);	//clear display
+/*	if(dev == -1){
 		perror("can't open device file\n");
 		return -EIO;
 	}
@@ -44,10 +40,9 @@ else{
 	if(ret < 0){
 		perror("cant write to devicefile\n");
 		return EIO;
-	}
-}
+	}*/
 
-close(dev);		//close device afterwards
+//close(dev);		//close device afterwards
 
 return 0;
 }

@@ -1,7 +1,7 @@
 var searchData=
 [
   ['magic_5fnum',['MAGIC_NUM',['../ioctl__header_8h.html#a23f15b5855019d8ac0c75f82484f8047',1,'ioctl_header.h']]],
-  ['main',['main',['../usr-lcd-control_8c.html#a3c04138a5bfe5d72780bb7e82a18e627',1,'usr-lcd-control.c']]],
+  ['main',['main',['../usr-lcd-control_8c.html#a3c04138a5bfe5d72780bb7e82a18e627',1,'main(int argc, char **argv):&#160;usr-lcd-control.c'],['../usr-print-ip_8c.html#a840291bc02cba5474a4cb46a9b9566fe',1,'main(void):&#160;usr-print-ip.c']]],
   ['major',['major',['../hd44780_8c.html#ac8947941479c38403a09c14a60b03f01',1,'hd44780.c']]],
   ['minor',['minor',['../hd44780_8c.html#aec7b96885baf2e6f10efbdef9d935a0b',1,'hd44780.c']]],
   ['mod_5fexit',['mod_exit',['../hd44780_8c.html#a39f7f81eb9dcc1767834f259f32979ba',1,'hd44780.c']]],
