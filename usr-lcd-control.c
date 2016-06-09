@@ -34,6 +34,7 @@ else{
 	int dev = open(devname, O_WRONLY);	//open device file -> WRITE ONLY
 	
 	ret = write(dev, "                                ", 32);	//clear display
+	ret = write(dev, "input from website", 32);		//just a test 
 	if(dev == -1){
 		perror("can't open device file\n");
 		return -EIO;

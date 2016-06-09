@@ -1,6 +1,6 @@
 /**
  * @file
- * @author	Daniel Obermaier, Victor Nagy, Markus Fischer
+ * @author	Daniel Obermaier, Victor Nagy
  * @date	01. June 2016
  * @version	0.1
  * @brief	loadable kernel module character device driver for support a simple 2x16 lcd display.
@@ -29,7 +29,7 @@
 
 #include "ioctl_header.h"	//includes self-written IOCTL macros and linux/ioctl.h as well
 
-MODULE_AUTHOR("Daniel Obermaier <mailto:dan.obermaier@gmail.com>");			// author(s) -> visible when using modinfo
+MODULE_AUTHOR("Daniel Obermaier <mailto:dan.obermaier@gmail.com>, Victor Nagy <mailto:victor.nagy@hotmail.de>");			// author(s) -> visible when using modinfo
 MODULE_DESCRIPTION("driver for LCD Display with HD44780 controller");		// describtion -> visible when using modinfo
 MODULE_LICENSE("GPL");														// license type -> affects available functionality
 MODULE_VERSION("0.1");														// version number
