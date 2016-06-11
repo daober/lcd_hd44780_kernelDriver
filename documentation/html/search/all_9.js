@@ -6,7 +6,7 @@ var searchData=
   ['minor',['minor',['../hd44780_8c.html#aec7b96885baf2e6f10efbdef9d935a0b',1,'hd44780.c']]],
   ['mod_5fexit',['mod_exit',['../hd44780_8c.html#a39f7f81eb9dcc1767834f259f32979ba',1,'hd44780.c']]],
   ['mod_5finit',['mod_init',['../hd44780_8c.html#a2b796de854877d3b6e8e9c73a8c60c00',1,'hd44780.c']]],
-  ['module_5fauthor',['MODULE_AUTHOR',['../hd44780_8c.html#abf13a12292da7acc4b17217fe0f37417',1,'hd44780.c']]],
+  ['module_5fauthor',['MODULE_AUTHOR',['../hd44780_8c.html#a96387bbd4c7b27256a28863012f6c485',1,'hd44780.c']]],
   ['module_5fdescription',['MODULE_DESCRIPTION',['../hd44780_8c.html#a3b308580fb76459a08a77c2394250426',1,'hd44780.c']]],
   ['module_5fexit',['module_exit',['../hd44780_8c.html#a92f7251a3e21772c1063cb378ab99b3d',1,'hd44780.c']]],
   ['module_5finfo',['MODULE_INFO',['../hd44780_8mod_8c.html#a59ae061e50f755cbc9dbde3c6688273a',1,'MODULE_INFO(vermagic, VERMAGIC_STRING):&#160;hd44780.mod.c'],['../hd44780_8mod_8c.html#ad924799162e08e29a044a7e63229ea1a',1,'MODULE_INFO(srcversion,&quot;9490EAC9968BAC7D1AF5989&quot;):&#160;hd44780.mod.c']]],

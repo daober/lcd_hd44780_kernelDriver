@@ -1,6 +1,6 @@
 /**
  * @file
- * @author	Daniel Obermaier, Victor Nagy
+ * @author	Daniel Obermaier
  * @date	01. June 2016
  * @version	0.1
  * @brief	loadable kernel module character device driver for support a simple 2x16 lcd display.

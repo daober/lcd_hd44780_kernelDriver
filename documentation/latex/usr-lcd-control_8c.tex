@@ -68,21 +68,22 @@ Daniel Obermaier
 34     \textcolor{keywordtype}{int} dev = open(devname, O\_WRONLY);  \textcolor{comment}{//open device file -> WRITE ONLY}
 35     
 36     ret = write(dev, \textcolor{stringliteral}{"                                "}, 32);   \textcolor{comment}{//clear display}
-37     \textcolor{keywordflow}{if}(dev == -1)\{
-38         perror(\textcolor{stringliteral}{"can't open device file\(\backslash\)n"});
-39         \textcolor{keywordflow}{return} -EIO;
-40     \}
-41 
-42     ret = write(dev, argv[1], 128);     \textcolor{comment}{//write string to device}
-43 
-44     \textcolor{keywordflow}{if}(ret < 0)\{
-45         perror(\textcolor{stringliteral}{"cant write to devicefile\(\backslash\)n"});
-46         \textcolor{keywordflow}{return} EIO;
-47     \}
-48 \}
-49 
-50 close(dev);     \textcolor{comment}{//close device afterwards}
-51 
-52 \textcolor{keywordflow}{return} 0;
-53 \}
+37     ret = write(dev, \textcolor{stringliteral}{"input from website"}, 32);     \textcolor{comment}{//just a test }
+38     \textcolor{keywordflow}{if}(dev == -1)\{
+39         perror(\textcolor{stringliteral}{"can't open device file\(\backslash\)n"});
+40         \textcolor{keywordflow}{return} -EIO;
+41     \}
+42 
+43     ret = write(dev, argv[1], 128);     \textcolor{comment}{//write string to device}
+44 
+45     \textcolor{keywordflow}{if}(ret < 0)\{
+46         perror(\textcolor{stringliteral}{"cant write to devicefile\(\backslash\)n"});
+47         \textcolor{keywordflow}{return} EIO;
+48     \}
+49 \}
+50 
+51 close(dev);     \textcolor{comment}{//close device afterwards}
+52 
+53 \textcolor{keywordflow}{return} 0;
+54 \}
 \end{DoxyCode}
