@@ -1,6 +1,8 @@
 /**
  * @file
  * @author	Daniel Obermaier
+		Victor Nagy
+		Markus Fischer
  * @date	01. June 2016
  * @version	0.1
  * @brief	loadable kernel module character device driver for support a simple 2x16 lcd display.
@@ -35,7 +37,7 @@ MODULE_LICENSE("GPL");														// license type -> affects available functio
 MODULE_VERSION("0.1");														// version number
 
 static int major = 0;				///< major number as an lkm identifier
-static int minor = 0;			
+static int minor = 0;
 static int count = 1;
 
 dev_t dev = 0;					///< variable for lcd device
@@ -49,7 +51,7 @@ static char textbuffer[1024];
 
 /*function prototypes start*/
 
-/** 
+/**
  * @brief writes 4-bit values to gpio
  *
  * @param control character

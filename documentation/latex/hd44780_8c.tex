@@ -99,7 +99,7 @@ static struct file\+\_\+operations \hyperlink{hd44780_8c_a28ee7ed9613033920e733c
 loadable kernel module character device driver for support a simple 2x16 lcd display. within the lcd display is a commonly used H\+D44780 controller implemented. 
 
 \begin{DoxyAuthor}{Author}
-Daniel Obermaier 
+Daniel Obermaier Victor Nagy Markus Fischer 
 \end{DoxyAuthor}
 \begin{DoxyDate}{Date}
 01. June 2016 
@@ -134,13 +134,13 @@ will be called if device will be opened
 \end{DoxyParams}
 
 \begin{DoxyCode}
-295                                                          \{
-296     printk(KERN\_INFO \textcolor{stringliteral}{"hd44780: device opened from user\(\backslash\)n"});
-297 
-298     \hyperlink{hd44780_8c_afd20d9c5f02b616c3c3cb41892e3f5d3}{dev\_cnt}++;   \textcolor{comment}{//increment counter }
+297                                                          \{
+298     printk(KERN\_INFO \textcolor{stringliteral}{"hd44780: device opened from user\(\backslash\)n"});
 299 
-300     \textcolor{keywordflow}{return} 0;   
-301 \}
+300     \hyperlink{hd44780_8c_afd20d9c5f02b616c3c3cb41892e3f5d3}{dev\_cnt}++;   \textcolor{comment}{//increment counter }
+301 
+302     \textcolor{keywordflow}{return} 0;   
+303 \}
 \end{DoxyCode}
 \hypertarget{hd44780_8c_a6b207bce4fc5e05120e630d1c4bb6377}{\index{hd44780.\+c@{hd44780.\+c}!dev\+\_\+release@{dev\+\_\+release}}
 \index{dev\+\_\+release@{dev\+\_\+release}!hd44780.\+c@{hd44780.\+c}}
@@ -163,13 +163,13 @@ will be called on closing the device
 \end{DoxyParams}
 
 \begin{DoxyCode}
-310                                                             \{
-311     printk(KERN\_INFO \textcolor{stringliteral}{"hd44780: device closed from user\(\backslash\)n"});
-312 
-313     \hyperlink{hd44780_8c_afd20d9c5f02b616c3c3cb41892e3f5d3}{dev\_cnt}--;   \textcolor{comment}{//decrement counter}
+312                                                             \{
+313     printk(KERN\_INFO \textcolor{stringliteral}{"hd44780: device closed from user\(\backslash\)n"});
 314 
-315     \textcolor{keywordflow}{return} 0;
-316 \}
+315     \hyperlink{hd44780_8c_afd20d9c5f02b616c3c3cb41892e3f5d3}{dev\_cnt}--;   \textcolor{comment}{//decrement counter}
+316 
+317     \textcolor{keywordflow}{return} 0;
+318 \}
 \end{DoxyCode}
 \hypertarget{hd44780_8c_a23ebf6135f28b8d3c3e693971b9e2333}{\index{hd44780.\+c@{hd44780.\+c}!dev\+\_\+write@{dev\+\_\+write}}
 \index{dev\+\_\+write@{dev\+\_\+write}!hd44780.\+c@{hd44780.\+c}}
@@ -201,34 +201,34 @@ number of characters left
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-328                                                                                                     \{
-329 
-330     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} not\_copied; 
-331     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} to\_copy;
-332     \textcolor{keywordtype}{int} i;
-333 
-334     \textcolor{keywordtype}{char} msg\_from\_user[128] = \{ 0 \};
+330                                                                                                     \{
+331 
+332     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} not\_copied; 
+333     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} to\_copy;
+334     \textcolor{keywordtype}{int} i;
 335 
-336     to\_copy = min(cnt, \textcolor{keyword}{sizeof}(\hyperlink{hd44780_8c_a21566485093f5feef65ee0fc7a32a91e}{textbuffer}));
-337     not\_copied = copy\_from\_user(\hyperlink{hd44780_8c_a21566485093f5feef65ee0fc7a32a91e}{textbuffer}, user, to\_copy);
-338 
-339     \hyperlink{hd44780_8c_ae0b6133b70bc190065133c49eb16f55f}{write\_lcd}(0, 0x80);        \textcolor{comment}{//set cursor to begin}
+336     \textcolor{keywordtype}{char} msg\_from\_user[128] = \{ 0 \};
+337 
+338     to\_copy = min(cnt, \textcolor{keyword}{sizeof}(\hyperlink{hd44780_8c_a21566485093f5feef65ee0fc7a32a91e}{textbuffer}));
+339     not\_copied = copy\_from\_user(\hyperlink{hd44780_8c_a21566485093f5feef65ee0fc7a32a91e}{textbuffer}, user, to\_copy);
 340 
-341     \textcolor{keywordflow}{for}(i = 0; i < to\_copy && \hyperlink{hd44780_8c_a21566485093f5feef65ee0fc7a32a91e}{textbuffer}[i]; i++)\{
-342         \textcolor{keywordflow}{if}(isprint(textbuffer[i]))\{         \textcolor{comment}{//checks, whether the passed character is printable }
-343             \hyperlink{hd44780_8c_ae0b6133b70bc190065133c49eb16f55f}{write\_lcd}(1, textbuffer[i]);
-344         \}
-345         \textcolor{keywordflow}{if}( i == 15)\{
-346             \hyperlink{hd44780_8c_ae0b6133b70bc190065133c49eb16f55f}{write\_lcd}(0, 0xc0);            \textcolor{comment}{//jump to second row of display}
-347         \}
-348     \}
-349 
-350     \textcolor{keywordflow}{if}(copy\_from\_user(msg\_from\_user, user, cnt)) \{
-351         printk(\textcolor{stringliteral}{"failed copy from user"});
-352     \}
-353 \textcolor{keywordflow}{return} to\_copy-not\_copied;              \textcolor{comment}{//returns how many characters are left -> returns 0 if everything
+341     \hyperlink{hd44780_8c_ae0b6133b70bc190065133c49eb16f55f}{write\_lcd}(0, 0x80);        \textcolor{comment}{//set cursor to begin}
+342 
+343     \textcolor{keywordflow}{for}(i = 0; i < to\_copy && \hyperlink{hd44780_8c_a21566485093f5feef65ee0fc7a32a91e}{textbuffer}[i]; i++)\{
+344         \textcolor{keywordflow}{if}(isprint(textbuffer[i]))\{         \textcolor{comment}{//checks, whether the passed character is printable }
+345             \hyperlink{hd44780_8c_ae0b6133b70bc190065133c49eb16f55f}{write\_lcd}(1, textbuffer[i]);
+346         \}
+347         \textcolor{keywordflow}{if}( i == 15)\{
+348             \hyperlink{hd44780_8c_ae0b6133b70bc190065133c49eb16f55f}{write\_lcd}(0, 0xc0);            \textcolor{comment}{//jump to second row of display}
+349         \}
+350     \}
+351 
+352     \textcolor{keywordflow}{if}(copy\_from\_user(msg\_from\_user, user, cnt)) \{
+353         printk(\textcolor{stringliteral}{"failed copy from user"});
+354     \}
+355 \textcolor{keywordflow}{return} to\_copy-not\_copied;              \textcolor{comment}{//returns how many characters are left -> returns 0 if everything
        is copied properly }
-354 \}
+356 \}
 \end{DoxyCode}
 \hypertarget{hd44780_8c_aaeb9d01b89561b7086b450105ecd32fe}{\index{hd44780.\+c@{hd44780.\+c}!exit\+\_\+display@{exit\+\_\+display}}
 \index{exit\+\_\+display@{exit\+\_\+display}!hd44780.\+c@{hd44780.\+c}}
@@ -243,16 +243,16 @@ frees memory on every initialized gpio pin if module gets unloaded from kernel
 
 called from kernel callbacks 
 \begin{DoxyCode}
-277                              \{
-278     printk(\textcolor{stringliteral}{"exit display called\(\backslash\)n"});
-279     gpio\_free(25);
-280     gpio\_free(24);
-281     gpio\_free(23);
-282     gpio\_free(18);
-283     gpio\_free(8);
-284     gpio\_free(7);
-285     \textcolor{keywordflow}{return} 0;
-286 \}
+279                              \{
+280     printk(\textcolor{stringliteral}{"exit display called\(\backslash\)n"});
+281     gpio\_free(25);
+282     gpio\_free(24);
+283     gpio\_free(23);
+284     gpio\_free(18);
+285     gpio\_free(8);
+286     gpio\_free(7);
+287     \textcolor{keywordflow}{return} 0;
+288 \}
 \end{DoxyCode}
 \hypertarget{hd44780_8c_abedd5fbc5004aefc727091a522a79391}{\index{hd44780.\+c@{hd44780.\+c}!gpio\+\_\+request\+\_\+output@{gpio\+\_\+request\+\_\+output}}
 \index{gpio\+\_\+request\+\_\+output@{gpio\+\_\+request\+\_\+output}!hd44780.\+c@{hd44780.\+c}}
@@ -275,26 +275,26 @@ request successful or not as integer
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-194                                       \{
-195     
-196     \textcolor{keywordtype}{char} gpio\_name[12];
-197     \textcolor{keywordtype}{int} err = 0;
-198 
-199     snprintf( gpio\_name, \textcolor{keyword}{sizeof}(gpio\_name), \textcolor{stringliteral}{"rpi-gpio-%d"}, nr);
-200     err = gpio\_request(nr, gpio\_name);
-201 
-202     \textcolor{keywordflow}{if}(err)\{
-203         printk(\textcolor{stringliteral}{"gpio request for %s failed with %d\(\backslash\)n"}, gpio\_name, err);
-204         \textcolor{keywordflow}{return} err;
-205     \}
-206     err = gpio\_direction\_output(nr, 0);
-207     \textcolor{keywordflow}{if}(err)\{
-208         printk(\textcolor{stringliteral}{"gpio direction output failed %d\(\backslash\)n"}, err);
-209         gpio\_free(nr);
-210         \textcolor{keywordflow}{return} err;
-211     \}
-212     \textcolor{keywordflow}{return} err;
-213 \}
+196                                       \{
+197     
+198     \textcolor{keywordtype}{char} gpio\_name[12];
+199     \textcolor{keywordtype}{int} err = 0;
+200 
+201     snprintf( gpio\_name, \textcolor{keyword}{sizeof}(gpio\_name), \textcolor{stringliteral}{"rpi-gpio-%d"}, nr);
+202     err = gpio\_request(nr, gpio\_name);
+203 
+204     \textcolor{keywordflow}{if}(err)\{
+205         printk(\textcolor{stringliteral}{"gpio request for %s failed with %d\(\backslash\)n"}, gpio\_name, err);
+206         \textcolor{keywordflow}{return} err;
+207     \}
+208     err = gpio\_direction\_output(nr, 0);
+209     \textcolor{keywordflow}{if}(err)\{
+210         printk(\textcolor{stringliteral}{"gpio direction output failed %d\(\backslash\)n"}, err);
+211         gpio\_free(nr);
+212         \textcolor{keywordflow}{return} err;
+213     \}
+214     \textcolor{keywordflow}{return} err;
+215 \}
 \end{DoxyCode}
 \hypertarget{hd44780_8c_a56a4067c846fe4fc7959a60d87b8b0f1}{\index{hd44780.\+c@{hd44780.\+c}!init\+\_\+display@{init\+\_\+display}}
 \index{init\+\_\+display@{init\+\_\+display}!hd44780.\+c@{hd44780.\+c}}
@@ -312,54 +312,54 @@ returns 0 if initializing is successful, otherwise $<$0 checks if every gpio can
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-222                              \{
-223 
-224 printk(\textcolor{stringliteral}{"initialize display\(\backslash\)n"});
+224                              \{
 225 
-226 \textcolor{keywordflow}{if}(\hyperlink{hd44780_8c_abedd5fbc5004aefc727091a522a79391}{gpio\_request\_output}(7) == -1)\{
-227      \textcolor{keywordflow}{return} -EIO;
-228 \}
-229 \textcolor{keywordflow}{if}(\hyperlink{hd44780_8c_abedd5fbc5004aefc727091a522a79391}{gpio\_request\_output}(8) == -1)\{
-230     \textcolor{keywordflow}{goto} free7;
-231 \}
-232 \textcolor{keywordflow}{if}(\hyperlink{hd44780_8c_abedd5fbc5004aefc727091a522a79391}{gpio\_request\_output}(18) == -1)\{
-233     \textcolor{keywordflow}{goto} free8;
-234 \}
-235 \textcolor{keywordflow}{if}(\hyperlink{hd44780_8c_abedd5fbc5004aefc727091a522a79391}{gpio\_request\_output}(23) == -1)\{
-236     \textcolor{keywordflow}{goto} free18;
-237 \}
-238 \textcolor{keywordflow}{if}(\hyperlink{hd44780_8c_abedd5fbc5004aefc727091a522a79391}{gpio\_request\_output}(24) == -1)\{
-239     \textcolor{keywordflow}{goto} free23;
-240 \}
-241 \textcolor{keywordflow}{if}(\hyperlink{hd44780_8c_abedd5fbc5004aefc727091a522a79391}{gpio\_request\_output}(25) == -1)\{
-242     \textcolor{keywordflow}{goto} free24;
-243 \}
-244 
-245 msleep(15);
-246 \hyperlink{hd44780_8c_a0eab6f129d21added23841a39571dea3}{write\_nibble}(0, 0x3);
-247 msleep(5);
+226 printk(\textcolor{stringliteral}{"initialize display\(\backslash\)n"});
+227 
+228 \textcolor{keywordflow}{if}(\hyperlink{hd44780_8c_abedd5fbc5004aefc727091a522a79391}{gpio\_request\_output}(7) == -1)\{
+229      \textcolor{keywordflow}{return} -EIO;
+230 \}
+231 \textcolor{keywordflow}{if}(\hyperlink{hd44780_8c_abedd5fbc5004aefc727091a522a79391}{gpio\_request\_output}(8) == -1)\{
+232     \textcolor{keywordflow}{goto} free7;
+233 \}
+234 \textcolor{keywordflow}{if}(\hyperlink{hd44780_8c_abedd5fbc5004aefc727091a522a79391}{gpio\_request\_output}(18) == -1)\{
+235     \textcolor{keywordflow}{goto} free8;
+236 \}
+237 \textcolor{keywordflow}{if}(\hyperlink{hd44780_8c_abedd5fbc5004aefc727091a522a79391}{gpio\_request\_output}(23) == -1)\{
+238     \textcolor{keywordflow}{goto} free18;
+239 \}
+240 \textcolor{keywordflow}{if}(\hyperlink{hd44780_8c_abedd5fbc5004aefc727091a522a79391}{gpio\_request\_output}(24) == -1)\{
+241     \textcolor{keywordflow}{goto} free23;
+242 \}
+243 \textcolor{keywordflow}{if}(\hyperlink{hd44780_8c_abedd5fbc5004aefc727091a522a79391}{gpio\_request\_output}(25) == -1)\{
+244     \textcolor{keywordflow}{goto} free24;
+245 \}
+246 
+247 msleep(15);
 248 \hyperlink{hd44780_8c_a0eab6f129d21added23841a39571dea3}{write\_nibble}(0, 0x3);
-249 udelay(100);
+249 msleep(5);
 250 \hyperlink{hd44780_8c_a0eab6f129d21added23841a39571dea3}{write\_nibble}(0, 0x3);
-251 msleep(5);
-252 \hyperlink{hd44780_8c_a0eab6f129d21added23841a39571dea3}{write\_nibble}(0, 0x2);
+251 udelay(100);
+252 \hyperlink{hd44780_8c_a0eab6f129d21added23841a39571dea3}{write\_nibble}(0, 0x3);
 253 msleep(5);
-254 \hyperlink{hd44780_8c_ae0b6133b70bc190065133c49eb16f55f}{write\_lcd}(0, 0x28);    \textcolor{comment}{//Command: 4-Bit Mode, 2 lines}
-255 msleep(2);
-256 \hyperlink{hd44780_8c_ae0b6133b70bc190065133c49eb16f55f}{write\_lcd}(0, 0x01);
+254 \hyperlink{hd44780_8c_a0eab6f129d21added23841a39571dea3}{write\_nibble}(0, 0x2);
+255 msleep(5);
+256 \hyperlink{hd44780_8c_ae0b6133b70bc190065133c49eb16f55f}{write\_lcd}(0, 0x28);    \textcolor{comment}{//Command: 4-Bit Mode, 2 lines}
 257 msleep(2);
-258 
-259 \hyperlink{hd44780_8c_ae0b6133b70bc190065133c49eb16f55f}{write\_lcd}(0, 0x0c);     \textcolor{comment}{//display on, cursor off, blink off}
-260 \hyperlink{hd44780_8c_ae0b6133b70bc190065133c49eb16f55f}{write\_lcd}(0, 0xc0);
-261     \textcolor{keywordflow}{return} 0;
-262 
-263 free24: gpio\_free(24);
-264 free23: gpio\_free(23);
-265 free18: gpio\_free(18);
-266 free8: gpio\_free(8);
-267 free7: gpio\_free(7);
-268     \textcolor{keywordflow}{return} -EIO;
-269 \}
+258 \hyperlink{hd44780_8c_ae0b6133b70bc190065133c49eb16f55f}{write\_lcd}(0, 0x01);
+259 msleep(2);
+260 
+261 \hyperlink{hd44780_8c_ae0b6133b70bc190065133c49eb16f55f}{write\_lcd}(0, 0x0c);     \textcolor{comment}{//display on, cursor off, blink off}
+262 \hyperlink{hd44780_8c_ae0b6133b70bc190065133c49eb16f55f}{write\_lcd}(0, 0xc0);
+263     \textcolor{keywordflow}{return} 0;
+264 
+265 free24: gpio\_free(24);
+266 free23: gpio\_free(23);
+267 free18: gpio\_free(18);
+268 free8: gpio\_free(8);
+269 free7: gpio\_free(7);
+270     \textcolor{keywordflow}{return} -EIO;
+271 \}
 \end{DoxyCode}
 \hypertarget{hd44780_8c_a39f7f81eb9dcc1767834f259f32979ba}{\index{hd44780.\+c@{hd44780.\+c}!mod\+\_\+exit@{mod\+\_\+exit}}
 \index{mod\+\_\+exit@{mod\+\_\+exit}!hd44780.\+c@{hd44780.\+c}}
@@ -374,15 +374,15 @@ lkm exit function
 
 similiar to initialization function, it is static. \+\_\+\+\_\+exit macro notifies if code is used for a built-\/in driver (not a lkm) that this function is not required. 
 \begin{DoxyCode}
-421                                  \{
-422     dev\_info(\hyperlink{hd44780_8c_a7f39d148808b935cc26697ba64f38127}{hd44780\_dev}, \textcolor{stringliteral}{"mod\_exit called\(\backslash\)n"});
-423     \hyperlink{hd44780_8c_aaeb9d01b89561b7086b450105ecd32fe}{exit\_display}();
-424     device\_destroy(\hyperlink{hd44780_8c_a2924ecef65e0b40dc3dfab97f5a18b2f}{hd44780\_class}, \hyperlink{hd44780_8c_a8910285a0352a5c710e65ec9ecbe32a1}{dev});
-425     class\_destroy(\hyperlink{hd44780_8c_a2924ecef65e0b40dc3dfab97f5a18b2f}{hd44780\_class});
-426     cdev\_del(\hyperlink{hd44780_8c_a628c122c638ae60b0c6d8a30c4e55b46}{driver\_object});
-427     unregister\_chrdev\_region(\hyperlink{hd44780_8c_a8910285a0352a5c710e65ec9ecbe32a1}{dev}, 1);
-428     \textcolor{keywordflow}{return};
-429 \}
+423                                  \{
+424     dev\_info(\hyperlink{hd44780_8c_a7f39d148808b935cc26697ba64f38127}{hd44780\_dev}, \textcolor{stringliteral}{"mod\_exit called\(\backslash\)n"});
+425     \hyperlink{hd44780_8c_aaeb9d01b89561b7086b450105ecd32fe}{exit\_display}();
+426     device\_destroy(\hyperlink{hd44780_8c_a2924ecef65e0b40dc3dfab97f5a18b2f}{hd44780\_class}, \hyperlink{hd44780_8c_a8910285a0352a5c710e65ec9ecbe32a1}{dev});
+427     class\_destroy(\hyperlink{hd44780_8c_a2924ecef65e0b40dc3dfab97f5a18b2f}{hd44780\_class});
+428     cdev\_del(\hyperlink{hd44780_8c_a628c122c638ae60b0c6d8a30c4e55b46}{driver\_object});
+429     unregister\_chrdev\_region(\hyperlink{hd44780_8c_a8910285a0352a5c710e65ec9ecbe32a1}{dev}, 1);
+430     \textcolor{keywordflow}{return};
+431 \}
 \end{DoxyCode}
 \hypertarget{hd44780_8c_a2b796de854877d3b6e8e9c73a8c60c00}{\index{hd44780.\+c@{hd44780.\+c}!mod\+\_\+init@{mod\+\_\+init}}
 \index{mod\+\_\+init@{mod\+\_\+init}!hd44780.\+c@{hd44780.\+c}}
@@ -400,54 +400,54 @@ returns 0 if successful
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-365                                 \{
-366 \textcolor{keywordtype}{int} error = 0;  
-367 
-368 \hyperlink{hd44780_8c_a8910285a0352a5c710e65ec9ecbe32a1}{dev} = MKDEV(\hyperlink{hd44780_8c_ac8947941479c38403a09c14a60b03f01}{major}, \hyperlink{hd44780_8c_aec7b96885baf2e6f10efbdef9d935a0b}{minor});
+367                                 \{
+368 \textcolor{keywordtype}{int} error = 0;  
 369 
-370 \textcolor{keywordflow}{if}(register\_chrdev\_region(MKDEV(\hyperlink{hd44780_8c_ac8947941479c38403a09c14a60b03f01}{major}, 0),\hyperlink{hd44780_8c_ad43c3812e6d13e0518d9f8b8f463ffcf}{count},\textcolor{stringliteral}{"hd44780"}) < 0)\{
-371     printk(\textcolor{stringliteral}{"devicenumber(255, 0) in use!\(\backslash\)n"});
-372     \textcolor{keywordflow}{return} -EIO;
-373 \}
-374 \textcolor{keywordflow}{else}\{
-375     error = alloc\_chrdev\_region(&\hyperlink{hd44780_8c_a8910285a0352a5c710e65ec9ecbe32a1}{dev}, 0, \hyperlink{hd44780_8c_ad43c3812e6d13e0518d9f8b8f463ffcf}{count}, \textcolor{stringliteral}{"hd44780"});
-376     \hyperlink{hd44780_8c_ac8947941479c38403a09c14a60b03f01}{major} = MAJOR(\hyperlink{hd44780_8c_a8910285a0352a5c710e65ec9ecbe32a1}{dev});
-377 \}
-378 
-379 \hyperlink{hd44780_8c_a628c122c638ae60b0c6d8a30c4e55b46}{driver\_object} = cdev\_alloc();  \textcolor{comment}{/* registered object reserved*/}
+370 \hyperlink{hd44780_8c_a8910285a0352a5c710e65ec9ecbe32a1}{dev} = MKDEV(\hyperlink{hd44780_8c_ac8947941479c38403a09c14a60b03f01}{major}, \hyperlink{hd44780_8c_aec7b96885baf2e6f10efbdef9d935a0b}{minor});
+371 
+372 \textcolor{keywordflow}{if}(register\_chrdev\_region(MKDEV(\hyperlink{hd44780_8c_ac8947941479c38403a09c14a60b03f01}{major}, 0),\hyperlink{hd44780_8c_ad43c3812e6d13e0518d9f8b8f463ffcf}{count},\textcolor{stringliteral}{"hd44780"}) < 0)\{
+373     printk(\textcolor{stringliteral}{"devicenumber(255, 0) in use!\(\backslash\)n"});
+374     \textcolor{keywordflow}{return} -EIO;
+375 \}
+376 \textcolor{keywordflow}{else}\{
+377     error = alloc\_chrdev\_region(&\hyperlink{hd44780_8c_a8910285a0352a5c710e65ec9ecbe32a1}{dev}, 0, \hyperlink{hd44780_8c_ad43c3812e6d13e0518d9f8b8f463ffcf}{count}, \textcolor{stringliteral}{"hd44780"});
+378     \hyperlink{hd44780_8c_ac8947941479c38403a09c14a60b03f01}{major} = MAJOR(\hyperlink{hd44780_8c_a8910285a0352a5c710e65ec9ecbe32a1}{dev});
+379 \}
 380 
-381 \textcolor{keywordflow}{if}(\hyperlink{hd44780_8c_a628c122c638ae60b0c6d8a30c4e55b46}{driver\_object} == NULL)\{
-382     \textcolor{keywordflow}{goto} free\_device\_number;
-383 \}
-384 
-385 \hyperlink{hd44780_8c_a628c122c638ae60b0c6d8a30c4e55b46}{driver\_object}->owner = THIS\_MODULE;
-386 \hyperlink{hd44780_8c_a628c122c638ae60b0c6d8a30c4e55b46}{driver\_object}->ops = &\hyperlink{hd44780_8c_a28ee7ed9613033920e733c9da671f79c}{fops};
-387     
-388 \textcolor{keywordflow}{if}(cdev\_add(\hyperlink{hd44780_8c_a628c122c638ae60b0c6d8a30c4e55b46}{driver\_object}, \hyperlink{hd44780_8c_a8910285a0352a5c710e65ec9ecbe32a1}{dev}, 1))\{
-389     \textcolor{keywordflow}{goto} free\_cdev;
-390 \}
-391 
-392 \hyperlink{hd44780_8c_a2924ecef65e0b40dc3dfab97f5a18b2f}{hd44780\_class} = class\_create(THIS\_MODULE, \textcolor{stringliteral}{"hd44780"});
+381 \hyperlink{hd44780_8c_a628c122c638ae60b0c6d8a30c4e55b46}{driver\_object} = cdev\_alloc();  \textcolor{comment}{/* registered object reserved*/}
+382 
+383 \textcolor{keywordflow}{if}(\hyperlink{hd44780_8c_a628c122c638ae60b0c6d8a30c4e55b46}{driver\_object} == NULL)\{
+384     \textcolor{keywordflow}{goto} free\_device\_number;
+385 \}
+386 
+387 \hyperlink{hd44780_8c_a628c122c638ae60b0c6d8a30c4e55b46}{driver\_object}->owner = THIS\_MODULE;
+388 \hyperlink{hd44780_8c_a628c122c638ae60b0c6d8a30c4e55b46}{driver\_object}->ops = &\hyperlink{hd44780_8c_a28ee7ed9613033920e733c9da671f79c}{fops};
+389     
+390 \textcolor{keywordflow}{if}(cdev\_add(\hyperlink{hd44780_8c_a628c122c638ae60b0c6d8a30c4e55b46}{driver\_object}, \hyperlink{hd44780_8c_a8910285a0352a5c710e65ec9ecbe32a1}{dev}, 1))\{
+391     \textcolor{keywordflow}{goto} free\_cdev;
+392 \}
 393 
-394 \textcolor{keywordflow}{if}(IS\_ERR(\hyperlink{hd44780_8c_a2924ecef65e0b40dc3dfab97f5a18b2f}{hd44780\_class}))\{
-395     pr\_err(\textcolor{stringliteral}{"hd44780: no udev support!\(\backslash\)n"});
-396     \textcolor{keywordflow}{goto} free\_cdev;
-397 \}
-398 
-399 \hyperlink{hd44780_8c_a7f39d148808b935cc26697ba64f38127}{hd44780\_dev} = device\_create(\hyperlink{hd44780_8c_a2924ecef65e0b40dc3dfab97f5a18b2f}{hd44780\_class}, NULL, \hyperlink{hd44780_8c_a8910285a0352a5c710e65ec9ecbe32a1}{dev}, NULL, \textcolor{stringliteral}{"%s"}, \textcolor{stringliteral}{"hd44780"});
-400 dev\_info(\hyperlink{hd44780_8c_a7f39d148808b935cc26697ba64f38127}{hd44780\_dev}, \textcolor{stringliteral}{"mod\_init called\(\backslash\)n"});
-401 
-402 \textcolor{keywordflow}{if}(\hyperlink{hd44780_8c_a56a4067c846fe4fc7959a60d87b8b0f1}{init\_display}() == 0)\{
-403     \textcolor{keywordflow}{return} 0;
-404 \}
-405 
-406 free\_cdev:
-407     kobject\_put(&\hyperlink{hd44780_8c_a628c122c638ae60b0c6d8a30c4e55b46}{driver\_object}->kobj);
-408 free\_device\_number:
-409     unregister\_chrdev\_region(\hyperlink{hd44780_8c_a8910285a0352a5c710e65ec9ecbe32a1}{dev}, 1);
-410     printk(\textcolor{stringliteral}{"mod\_init failed\(\backslash\)n"});
-411     \textcolor{keywordflow}{return} -EIO;
-412 \}
+394 \hyperlink{hd44780_8c_a2924ecef65e0b40dc3dfab97f5a18b2f}{hd44780\_class} = class\_create(THIS\_MODULE, \textcolor{stringliteral}{"hd44780"});
+395 
+396 \textcolor{keywordflow}{if}(IS\_ERR(\hyperlink{hd44780_8c_a2924ecef65e0b40dc3dfab97f5a18b2f}{hd44780\_class}))\{
+397     pr\_err(\textcolor{stringliteral}{"hd44780: no udev support!\(\backslash\)n"});
+398     \textcolor{keywordflow}{goto} free\_cdev;
+399 \}
+400 
+401 \hyperlink{hd44780_8c_a7f39d148808b935cc26697ba64f38127}{hd44780\_dev} = device\_create(\hyperlink{hd44780_8c_a2924ecef65e0b40dc3dfab97f5a18b2f}{hd44780\_class}, NULL, \hyperlink{hd44780_8c_a8910285a0352a5c710e65ec9ecbe32a1}{dev}, NULL, \textcolor{stringliteral}{"%s"}, \textcolor{stringliteral}{"hd44780"});
+402 dev\_info(\hyperlink{hd44780_8c_a7f39d148808b935cc26697ba64f38127}{hd44780\_dev}, \textcolor{stringliteral}{"mod\_init called\(\backslash\)n"});
+403 
+404 \textcolor{keywordflow}{if}(\hyperlink{hd44780_8c_a56a4067c846fe4fc7959a60d87b8b0f1}{init\_display}() == 0)\{
+405     \textcolor{keywordflow}{return} 0;
+406 \}
+407 
+408 free\_cdev:
+409     kobject\_put(&\hyperlink{hd44780_8c_a628c122c638ae60b0c6d8a30c4e55b46}{driver\_object}->kobj);
+410 free\_device\_number:
+411     unregister\_chrdev\_region(\hyperlink{hd44780_8c_a8910285a0352a5c710e65ec9ecbe32a1}{dev}, 1);
+412     printk(\textcolor{stringliteral}{"mod\_init failed\(\backslash\)n"});
+413     \textcolor{keywordflow}{return} -EIO;
+414 \}
 \end{DoxyCode}
 \hypertarget{hd44780_8c_a96387bbd4c7b27256a28863012f6c485}{\index{hd44780.\+c@{hd44780.\+c}!M\+O\+D\+U\+L\+E\+\_\+\+A\+U\+T\+H\+O\+R@{M\+O\+D\+U\+L\+E\+\_\+\+A\+U\+T\+H\+O\+R}}
 \index{M\+O\+D\+U\+L\+E\+\_\+\+A\+U\+T\+H\+O\+R@{M\+O\+D\+U\+L\+E\+\_\+\+A\+U\+T\+H\+O\+R}!hd44780.\+c@{hd44780.\+c}}
@@ -539,10 +539,10 @@ uses write\+\_\+nibble to shift and reverse logic values
 \end{DoxyParams}
 
 \begin{DoxyCode}
-183                                             \{
-184     \hyperlink{hd44780_8c_a0eab6f129d21added23841a39571dea3}{write\_nibble}(regist, value >> 4); \textcolor{comment}{//HIGH-Nibble logic}
-185     \hyperlink{hd44780_8c_a0eab6f129d21added23841a39571dea3}{write\_nibble}(regist, value & 0xf); \textcolor{comment}{//LOW-Nibble logic}
-186 \}
+185                                             \{
+186     \hyperlink{hd44780_8c_a0eab6f129d21added23841a39571dea3}{write\_nibble}(regist, value >> 4); \textcolor{comment}{//HIGH-Nibble logic}
+187     \hyperlink{hd44780_8c_a0eab6f129d21added23841a39571dea3}{write\_nibble}(regist, value & 0xf); \textcolor{comment}{//LOW-Nibble logic}
+188 \}
 \end{DoxyCode}
 \hypertarget{hd44780_8c_a0eab6f129d21added23841a39571dea3}{\index{hd44780.\+c@{hd44780.\+c}!write\+\_\+nibble@{write\+\_\+nibble}}
 \index{write\+\_\+nibble@{write\+\_\+nibble}!hd44780.\+c@{hd44780.\+c}}
@@ -565,21 +565,21 @@ writes 4-\/bit values to gpio
 \end{DoxyParams}
 
 \begin{DoxyCode}
-161                                                \{
-162 
-163     gpio\_set\_value(7, regist);
-164     
-165     gpio\_set\_value(25, value & 0x1); \textcolor{comment}{//DATABIT 4}
-166     gpio\_set\_value(24, value & 0x2); \textcolor{comment}{//DATABIT 5}
-167     gpio\_set\_value(23, value & 0x4); \textcolor{comment}{//DATABIT 6}
-168     gpio\_set\_value(18, value & 0x8); \textcolor{comment}{//DATABIT 7}
-169 
-170     gpio\_set\_value(8, 1); \textcolor{comment}{//enabled to write values}
-171     
-172     udelay(40);
-173 
-174     gpio\_set\_value(8, 0); \textcolor{comment}{//disabled to write values}
-175 \}
+163                                                \{
+164 
+165     gpio\_set\_value(7, regist);
+166     
+167     gpio\_set\_value(25, value & 0x1); \textcolor{comment}{//DATABIT 4}
+168     gpio\_set\_value(24, value & 0x2); \textcolor{comment}{//DATABIT 5}
+169     gpio\_set\_value(23, value & 0x4); \textcolor{comment}{//DATABIT 6}
+170     gpio\_set\_value(18, value & 0x8); \textcolor{comment}{//DATABIT 7}
+171 
+172     gpio\_set\_value(8, 1); \textcolor{comment}{//enabled to write values}
+173     
+174     udelay(40);
+175 
+176     gpio\_set\_value(8, 0); \textcolor{comment}{//disabled to write values}
+177 \}
 \end{DoxyCode}
 
 
