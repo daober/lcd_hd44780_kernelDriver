@@ -1,5 +1,0 @@
-<map id="/home/pi/SysProg/lcd&#45;driver/ioctl_header.h" name="/home/pi/SysProg/lcd&#45;driver/ioctl_header.h">
-<area shape="rect" id="node2" href="$hd44780_8c.html" title="loadable kernel module character device driver for support a simple 2x16 lcd display. within the lcd display is a commonly used HD44780 controller implemented. " alt="" coords="5,95,152,136"/>
-<area shape="rect" id="node3" href="$usr-lcd-control_8c.html" title="a linux user space program that communicates with the hd44780 linux kernel module (LKM)..." alt="" coords="176,95,331,136"/>
-<area shape="rect" id="node4" href="$usr-print-ip_8c.html" title="/home/pi/SysProg/lcd\l&#45;driver/usr&#45;print&#45;ip.c" alt="" coords="355,95,501,136"/>
-</map>
